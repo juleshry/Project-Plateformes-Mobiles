@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPlateformesMobiles">
         <activity
+            android:name=".ui.accountCreation.AccountCreation"
+            android:exported="false"
+            android:label="@string/title_activity_account_creation"
+            android:theme="@style/Theme.ProjectPlateformesMobiles.NoActionBar" >
+        </activity>
+        <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:label="@string/login_activity">

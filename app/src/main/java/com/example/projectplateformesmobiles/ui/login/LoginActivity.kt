@@ -1,6 +1,7 @@
 package com.example.projectplateformesmobiles.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.projectplateformesmobiles.ui.accountCreation.AccountCreation
 
 import com.example.projectplateformesmobiles.R
 
@@ -29,8 +31,10 @@ class LoginActivity : AppCompatActivity() {
         val login: Button = findViewById(R.id.login)
         val username: EditText = findViewById(R.id.username)
         val password: EditText = findViewById(R.id.password)
-        val loading : ProgressBar = findViewById(R.id.loading)
-        val create : Button=findViewById(R.id.createAccount)
+        val loading: ProgressBar = findViewById(R.id.loading)
+        val create: Button = findViewById(R.id.createAccount)
+
+        val accountCreationIntent:Intent=Intent(this, AccountCreation::class.java)
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -95,10 +99,9 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
-
-            create.setOnClickListener{
-                println("ok")
-            }
+        }
+        create.setOnClickListener{
+            startActivity(accountCreationIntent)
         }
     }
 
