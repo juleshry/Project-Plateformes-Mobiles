@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.projectplateformesmobiles.Menu
 import com.example.projectplateformesmobiles.ui.accountCreation.AccountCreation
 
 import com.example.projectplateformesmobiles.R
@@ -35,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
         val create: Button = findViewById(R.id.createAccount)
 
         val accountCreationIntent:Intent=Intent(this, AccountCreation::class.java)
+        val menuIntent: Intent = Intent(this, Menu::class.java)
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -96,8 +98,9 @@ class LoginActivity : AppCompatActivity() {
             }
 
             login.setOnClickListener {
-                loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
+                //loading.visibility = View.VISIBLE
+                //loginViewModel.login(username.text.toString(), password.text.toString())
+                startActivity(menuIntent)
             }
         }
         create.setOnClickListener{

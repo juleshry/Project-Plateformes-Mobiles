@@ -20,4 +20,7 @@
     <string name="confirm_password">Confirmer le mote de passe</string>
     <string name="confirm">Confirmer</string>
     <string name="cancel">Annuler</string>
+
+    <!-- Strings related to Home -->
+    <string name="Home_title">Mes recettes</string>
 </resources>
