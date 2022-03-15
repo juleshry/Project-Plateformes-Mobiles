@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".new_recipe">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/NewRecipeAppBarTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.ProjectPlateformesMobiles.AppBarOverlay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarTop"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/newRecipeToolBarTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/newRecipe"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/addPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vert_field_separation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/NewRecipeAppBarTop"
+        >
+
+    <TextView
+        android:id="@+id/addPhotoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:text="@string/addPicture"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSizeCorps"
+        android:layout_gravity="center_vertical"
+         />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/addPhotoButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="@drawable/add_photo"
+            android:text="addPhoto"
+            android:textSize="0dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vert_field_separation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addPhoto"
+        >
+
+        <TextView
+            android:id="@+id/addDescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:text="@string/addDescription"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSizeCorps"
+            android:layout_gravity="center_vertical"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/addDescriptionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="@drawable/add_logo"
+            android:text="addPhoto"
+            android:textSize="0dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addIngredient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vert_field_separation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addDescription"
+        >
+
+        <TextView
+            android:id="@+id/addIngredientText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:text="@string/addIngredient"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSizeCorps"
+            android:layout_gravity="center_vertical"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/addIngredientButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="@drawable/add_logo"
+            android:text="addPhoto"
+            android:textSize="0dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addEtape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vert_field_separation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addIngredient"
+        >
+
+        <TextView
+            android:id="@+id/addEtapeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:text="@string/addEtape"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSizeCorps"
+            android:layout_gravity="center_vertical"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/addEtapeButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="@drawable/add_logo"
+            android:text="addPhoto"
+            android:textSize="0dp" />
+
+    </LinearLayout>
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/NewRecipeAppBarBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.ProjectPlateformesMobiles.AppBarOverlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bottom_navigation"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <Button
+                android:id="@+id/CancelNewRecipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="45dp"
+                android:background="@drawable/light_button"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/cancel"
+                android:textColor="@color/dark_green" />
+
+            <Button
+                android:id="@+id/ConfirmNewRecipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="45dp"
+                android:background="@drawable/plain_button"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/Valider"
+                android:textColor="@color/white" />
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

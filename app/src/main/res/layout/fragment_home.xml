@@ -8,7 +8,7 @@
     tools:context=".HomeFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/accountCreationAppBar"
+        android:id="@+id/HomeAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.ProjectPlateformesMobiles.AppBarOverlay"
