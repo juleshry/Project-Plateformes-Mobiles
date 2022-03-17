@@ -2,6 +2,7 @@
     <string name="app_name">Project Plateformes Mobiles</string>
 
     <string name="Valider">Valider</string>
+    <string name="Continue">Continuer</string>
 
     <!-- Strings related to login -->
     <string name="login_activity">Login activity</string>
@@ -33,4 +34,7 @@
     <string name="addDescription">Ajouter une description</string>
     <string name="addIngredient">Ajouter un ingrédient</string>
     <string name="addEtape">Ajouter une étape</string>
+
+    <!-- Strings related to newRecipe -->
+    <string name="cancelString">Etes-vous sûre de vouloir annuler ?</string>
 </resources>
