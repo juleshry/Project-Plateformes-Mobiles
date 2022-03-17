@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View =  inflater.inflate(R.layout.fragment_home, container, false)
 
-        val newRecipeIntent: Intent = Intent(getActivity(), new_recipe::class.java)
+        val newRecipeIntent: Intent = Intent(getActivity(), New_recipe::class.java)
 
         val newRecipeButton: Button = view.findViewById<Button>(R.id.newRecipeButton)
         newRecipeButton.setOnClickListener{
