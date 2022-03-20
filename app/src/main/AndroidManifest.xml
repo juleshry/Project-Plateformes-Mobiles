@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPlateformesMobiles">
         <activity
-            android:name=".New_recipe"
+            android:name=".NewRecipe"
             android:exported="false" />
         <activity
             android:name=".Menu"

@@ -10,10 +10,9 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
-import android.graphics.Color as Color
 
 
-class New_recipe : AppCompatActivity() {
+class NewRecipe : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +27,14 @@ class New_recipe : AppCompatActivity() {
 
     }
 
-    fun cancelButtonOnClick(inflater: LayoutInflater, view: View){
+    private fun cancelButtonOnClick(inflater: LayoutInflater, view: View){
 
         val popupView: View = inflater.inflate(R.layout.cancel_popup, null)
 
         val width: Int = LinearLayout.LayoutParams.MATCH_PARENT
         val height: Int = LinearLayout.LayoutParams.MATCH_PARENT
-        val focusable: Boolean = true
-        val popupWindow: PopupWindow = PopupWindow(popupView, width, height, focusable)
+        val focusable = true
+        val popupWindow = PopupWindow(popupView, width, height, focusable)
 
         this.window.statusBarColor = ContextCompat.getColor(this, R.color.semiTransparent)
 

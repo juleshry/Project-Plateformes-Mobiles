@@ -37,4 +37,8 @@
 
     <!-- Strings related to newRecipe -->
     <string name="cancelString">Etes-vous sûre de vouloir annuler ?</string>
+
+    <!-- Strings related to userPopup -->
+    <string name="account">Compte</string>
+    <string name="settings">Paramètres</string>
 </resources>

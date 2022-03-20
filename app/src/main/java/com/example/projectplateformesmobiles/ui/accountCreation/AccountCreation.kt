@@ -12,7 +12,7 @@ class AccountCreation : AppCompatActivity() {
 
         setContentView(R.layout.activity_account_creation)
 
-        val cancel: Button = findViewById(R.id.cancel)
+        val cancel: Button = findViewById(R.id.CancelNewAccount)
 
 
         cancel.setOnClickListener{

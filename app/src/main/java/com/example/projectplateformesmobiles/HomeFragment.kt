@@ -7,6 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.content.Intent
+import android.view.Gravity
+import android.widget.LinearLayout
+import android.widget.PopupWindow
+import androidx.core.content.ContextCompat
 
 
 /**
@@ -24,19 +28,45 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         // Inflate the layout for this fragment
         val view: View =  inflater.inflate(R.layout.fragment_home, container, false)
 
-        val newRecipeIntent: Intent = Intent(getActivity(), New_recipe::class.java)
-
+        val newRecipeIntent = Intent(getActivity(), NewRecipe::class.java)
         val newRecipeButton: Button = view.findViewById<Button>(R.id.newRecipeButton)
         newRecipeButton.setOnClickListener{
             startActivity(newRecipeIntent)
         }
 
+        val userButton: Button = view.findViewById(R.id.userButton)
+        userButton.setOnClickListener{
+            userButtonOnClickListener(inflater, view)
+        }
+
         return view
+    }
+
+    private fun userButtonOnClickListener(inflater: LayoutInflater, view: View){
+        val popupView: View = inflater.inflate(R.layout.user_popup, null)
+
+        val width: Int = LinearLayout.LayoutParams.MATCH_PARENT
+        val height: Int = LinearLayout.LayoutParams.MATCH_PARENT
+        val focusable = true
+        val popupWindow = PopupWindow(popupView, width, height, focusable)
+
+        this.requireActivity().window.statusBarColor = ContextCompat.getColor(this.requireActivity(), R.color.semiTransparent)
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
+
+
+        fun closePopupListener(){
+            this.requireActivity().window.statusBarColor = ContextCompat.getColor(this.requireActivity(), R.color.white)
+            popupWindow.dismiss()
+        }
+
+        val closeButton: Button = popupView.findViewById(R.id.backPopup)
+        closeButton.setOnClickListener{closePopupListener()}
     }
 
     companion object {

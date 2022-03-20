@@ -53,7 +53,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/cancel_button_popup"
                     android:text="@string/Continue"
-                    android:textColor="@color/dark_green" />
+                    android:textColor="@color/dark_green"
+                    android:textAllCaps="false"/>
 
                 <Button
                     android:id="@+id/ConfirmButtonPopup"
@@ -62,7 +63,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/continue_button_popup"
                     android:text="@string/confirm"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>

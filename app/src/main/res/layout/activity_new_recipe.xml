@@ -45,16 +45,16 @@
         app:layout_constraintTop_toBottomOf="@id/NewRecipeAppBarTop"
         >
 
-    <TextView
-        android:id="@+id/addPhotoText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:text="@string/addPicture"
-        android:textColor="@color/black"
-        android:textSize="@dimen/textSizeCorps"
-        android:layout_gravity="center_vertical"
-         />
+        <TextView
+            android:id="@+id/addPhotoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:text="@string/addPicture"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSizeCorps"
+            android:layout_gravity="center_vertical"
+            />
 
         <View
             android:layout_width="0dp"
@@ -192,34 +192,43 @@
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarBottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="match_parent"
             >
 
-            <Button
-                android:id="@+id/CancelNewRecipe"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="45dp"
-                android:background="@drawable/light_button"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:text="@string/cancel"
-                android:textColor="@color/dark_green" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
 
-            <Button
-                android:id="@+id/ConfirmNewRecipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="45dp"
-                android:background="@drawable/plain_button"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:text="@string/Valider"
-                android:textColor="@color/white" />
+                <Button
+                    android:id="@+id/CancelNewRecipe"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/light_button"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/dark_green"
+                    android:textAllCaps="false"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/bottom_horizontal_margin"/>
+
+                <Button
+                    android:id="@+id/ConfirmNewRecipe"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/plain_button"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:text="@string/Valider"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/bottom_horizontal_margin"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.Toolbar>
 
 

@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@drawable/full_background"
     tools:context=".ui.accountCreation.AccountCreation">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -42,13 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vert_field_separation"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginHorizontal="@dimen/bottom_horizontal_margin"
         android:background="@drawable/rounded_edittext"
         android:hint="@string/name"
         android:inputType="text"
         android:minHeight="48dp"
-        android:paddingStart="10dp"
+        android:paddingHorizontal="@dimen/horizontal_padding"
         android:selectAllOnFocus="true"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -62,13 +59,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vert_field_separation"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginHorizontal="@dimen/bottom_horizontal_margin"
         android:background="@drawable/rounded_edittext"
         android:inputType="text"
         android:hint="@string/surname"
         android:minHeight="48dp"
-        android:paddingStart="10dp"
+        android:paddingHorizontal="@dimen/horizontal_padding"
         android:selectAllOnFocus="true"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -81,13 +77,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vert_field_separation"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginHorizontal="@dimen/bottom_horizontal_margin"
         android:background="@drawable/rounded_edittext"
         android:inputType="textEmailAddress"
         android:hint="@string/email"
         android:minHeight="48dp"
-        android:paddingStart="10dp"
+        android:paddingHorizontal="@dimen/horizontal_padding"
         android:selectAllOnFocus="true"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -100,13 +95,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vert_field_separation"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginHorizontal="@dimen/bottom_horizontal_margin"
         android:background="@drawable/rounded_edittext"
         android:inputType="text"
         android:hint="@string/username"
         android:minHeight="48dp"
-        android:paddingStart="10dp"
+        android:paddingHorizontal="@dimen/horizontal_padding"
         android:selectAllOnFocus="true"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -119,13 +113,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vert_field_separation"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginHorizontal="@dimen/bottom_horizontal_margin"
         android:background="@drawable/rounded_edittext"
         android:inputType="textPassword"
         android:hint="@string/password"
         android:minHeight="48dp"
-        android:paddingStart="10dp"
+        android:paddingHorizontal="@dimen/horizontal_padding"
         android:selectAllOnFocus="true"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -138,13 +131,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vert_field_separation"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginHorizontal="@dimen/bottom_horizontal_margin"
         android:background="@drawable/rounded_edittext"
         android:inputType="textPassword"
         android:hint="@string/confirm_password"
         android:minHeight="48dp"
-        android:paddingStart="10dp"
+        android:paddingHorizontal="@dimen/horizontal_padding"
         android:selectAllOnFocus="true"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -152,36 +144,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
-    <Button
-        android:id="@+id/create"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/NewAccountAppBarBottom"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/plain_button"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="@string/confirm"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cancel" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/bottom_navigation"
+        android:theme="@style/Theme.ProjectPlateformesMobiles.AppBarOverlay"
+        app:elevation="0dp"
+        >
 
-    <Button
-        android:id="@+id/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/light_button"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="@string/cancel"
-        android:textColor="@color/dark_green"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/create"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/activity_vertical_margin">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginEnd="16dp">
+
+                <Button
+                    android:id="@+id/CancelNewAccount"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/bottom_horizontal_margin"
+                    android:layout_marginVertical="@dimen/activity_vertical_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/light_button"
+                    android:text="@string/cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dark_green" />
+
+                <Button
+                    android:id="@+id/ConfirmNewAccount"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/bottom_horizontal_margin"
+                    android:layout_marginVertical="@dimen/activity_vertical_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/plain_button"
+                    android:text="@string/confirm"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
