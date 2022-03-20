@@ -17,6 +17,7 @@
         <entry key="..\:/Users/jubil/AndroidStudioProjects/ProjectPlateformesMobiles/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.14322916666666666" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/add_logo.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/add_photo.xml" value="0.21561181434599155" />
+        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/back_button.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/bottom_navigation.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/cancel_button_popup.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/continue_button_popup.xml" value="0.21561181434599155" />
@@ -28,8 +29,9 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout-w936dp/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_account_creation.xml" value="0.264" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_login.xml" value="0.2" />
-        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_menu.xml" value="0.21359223300970873" />
+        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_menu.xml" value="0.2" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_new_recipe.xml" value="0.37750385208012327" />
+        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_settings.xml" value="0.264" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/cancel_popup.xml" value="0.27976878612716766" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/content_account_creation.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/fragment_dashboard.xml" value="0.1170940170940171" />
@@ -39,26 +41,7 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1423076923076923" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.4" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15358649789029535" />
-<<<<<<< HEAD
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15555555555555556" />
-=======
-        <entry key="..\:/cygwin64/home/touestephane/Project-Plateformes-Mobiles/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
-        <entry key="..\:/cygwin64/home/touestephane/Project-Plateformes-Mobiles/app/src/main/res/drawable/add_logo.xml" value="0.1" />
-        <entry key="..\:/cygwin64/home/touestephane/Project-Plateformes-Mobiles/app/src/main/res/drawable/add_photo.xml" value="0.1" />
-        <entry key="..\:/cygwin64/home/touestephane/Project-Plateformes-Mobiles/app/src/main/res/drawable/bottom_navigation.xml" value="0.1" />
-        <entry key="..\:/cygwin64/home/touestephane/Project-Plateformes-Mobiles/app/src/main/res/drawable/full_background.xml" value="0.1" />
-        <entry key="..\:/cygwin64/home/touestephane/Project-Plateformes-Mobiles/app/src/main/res/drawable/home_logo.xml" value="0.1" />
-        <entry key="..\:/cygwin64/home/touestephane/Project-Plateformes-Mobiles/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
-        <entry key="..\:/cygwin64/home/touestephane/Project-Plateformes-Mobiles/app/src/main/res/drawable/light_button.xml" value="0.1" />
-        <entry key="..\:/cygwin64/home/touestephane/Project-Plateformes-Mobiles/app/src/main/res/drawable/new_recipe_button.xml" value="0.1" />
-        <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_account_creation.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.28318786621093756" />
-        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.17002563476562502" />
-        <entry key="app/src/main/res/layout/activity_new_recipe.xml" value="0.1" />
-        <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.15520833333333334" />
->>>>>>> f7c9b044fd2d561390b9cd5303d9f90bf8083f04
       </map>
     </option>
   </component>

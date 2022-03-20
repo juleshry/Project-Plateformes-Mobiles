@@ -12,12 +12,12 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
+import com.example.projectplateformesmobiles.ui.Settings
 import com.example.projectplateformesmobiles.ui.login.LoginActivity
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_menu.*
 
 
 /**
@@ -75,8 +75,14 @@ class HomeFragment : Fragment() {
         val closeButton: Button = popupView.findViewById(R.id.backPopup)
         closeButton.setOnClickListener{closePopupListener()}
 
-        val logoutButton: Button = popupView.findViewById(R.id.logout_button)
+        val settingsButton: Button = popupView.findViewById(R.id.settingsButton)
+        settingsButton.setOnClickListener{
+            closePopupListener()
+            val settingsIntent = Intent(this.requireActivity(), Settings::class.java)
+            startActivity(settingsIntent)
+        }
 
+        val logoutButton: Button = popupView.findViewById(R.id.logout_button)
         var auth: FirebaseAuth = Firebase.auth
         logoutButton.setOnClickListener {
             Log.i("APP", "Logout")

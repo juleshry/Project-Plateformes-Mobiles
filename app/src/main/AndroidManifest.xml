@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPlateformesMobiles">
         <activity
+            android:name=".ui.Settings"
+            android:exported="false" />
+        <activity
             android:name=".NewRecipe"
             android:exported="false" />
         <activity
@@ -19,7 +22,7 @@
             android:name=".ui.accountCreation.AccountCreation"
             android:exported="false"
             android:label="@string/title_activity_account_creation"
-            android:theme="@style/Theme.ProjectPlateformesMobiles.NoActionBar"/>
+            android:theme="@style/Theme.ProjectPlateformesMobiles.NoActionBar" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
