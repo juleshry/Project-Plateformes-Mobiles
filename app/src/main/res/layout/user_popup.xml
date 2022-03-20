@@ -47,6 +47,17 @@
                 android:paddingHorizontal="@dimen/fab_margin"
                 android:textAllCaps="false"/>
 
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:textColor="@color/dark_green"
+                android:background="@color/transparent"
+                android:textAlignment="textStart"
+                android:paddingHorizontal="@dimen/fab_margin"
+                android:textAllCaps="false"/>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </RelativeLayout>

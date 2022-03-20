@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-/*
+
         val login: Button = findViewById(R.id.login)
         val username: EditText = findViewById(R.id.username)
         val password: EditText = findViewById(R.id.password)
@@ -135,7 +135,7 @@ class LoginActivity : AppCompatActivity() {
         }
         create.setOnClickListener{
             startActivity(accountCreationIntent)
-        }*/
+        }
     }
 
     override fun onStart() {

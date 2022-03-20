@@ -7,10 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.content.Intent
+import android.util.Log
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
+import com.example.projectplateformesmobiles.ui.login.LoginActivity
+
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_menu.*
 
 
 /**
@@ -67,6 +74,17 @@ class HomeFragment : Fragment() {
 
         val closeButton: Button = popupView.findViewById(R.id.backPopup)
         closeButton.setOnClickListener{closePopupListener()}
+
+        val logoutButton: Button = popupView.findViewById(R.id.logout_button)
+
+        var auth: FirebaseAuth = Firebase.auth
+        logoutButton.setOnClickListener {
+            Log.i("APP", "Logout")
+            auth.signOut()
+            val logoutIntent = Intent(this.requireActivity(), LoginActivity::class.java)
+            logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(logoutIntent)
+        }
     }
 
     companion object {

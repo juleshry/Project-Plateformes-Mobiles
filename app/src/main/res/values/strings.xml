@@ -41,4 +41,5 @@
     <!-- Strings related to userPopup -->
     <string name="account">Compte</string>
     <string name="settings">Paramètres</string>
+    <string name="logout">Déconnexion</string>
 </resources>
