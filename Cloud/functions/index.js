@@ -18,7 +18,6 @@ exports.addUsertoFirestore = functions.auth.user().onCreate((user) => {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
-    displayName: user.displayName,
-    // password ?
+    displayName: user.displayName
   });
 });
