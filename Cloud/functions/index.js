@@ -15,9 +15,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 exports.addUsertoFirestore = functions.auth.user().onCreate((user) => {
   const usersRef = admin.firestore().collection("users");
   return usersRef.doc(user.uid).set({
-    firstName: user.firstName,
-    lastName: user.lastName,
     email: user.email,
-    displayName: user.displayName
+    displayName: user.displayName,
   });
 });
