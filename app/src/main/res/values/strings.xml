@@ -39,6 +39,7 @@
 
     <!-- Strings related to newRecipe -->
     <string name="cancelString">Etes-vous sûre de vouloir annuler ?</string>
+    <string name="addTitle">Ajouter un Titre</string>
 
     <!-- Strings related to userPopup -->
     <string name="logout">Déconnexion</string>
@@ -48,4 +49,8 @@
 
     <!-- Strings related to account -->
     <string name="account">Compte</string>
+
+    <!-- Strings related to photoPopup -->
+    <string name="takePicture">Prendre une photo</string>
+    <string name="choosePicture">Choisir une photo de la galerie</string>
 </resources>

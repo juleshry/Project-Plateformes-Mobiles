@@ -36,13 +36,28 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <EditText
+        android:id="@+id/addTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vert_field_separation"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:background="@drawable/rounded_edittext"
+        android:hint="@string/addTitle"
+        android:padding="@dimen/horizontal_padding"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/NewRecipeAppBarTop"/>
+
     <LinearLayout
         android:id="@+id/addPhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vert_field_separation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/NewRecipeAppBarTop"
+        app:layout_constraintTop_toBottomOf="@id/addTitle"
         >
 
         <TextView
@@ -68,45 +83,27 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:background="@drawable/add_photo"
             android:text="addPhoto"
-            android:textSize="0dp" />
+            android:textSize="0sp" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <EditText
         android:id="@+id/addDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="70dp"
         android:layout_marginTop="@dimen/vert_field_separation"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:background="@drawable/rounded_edittext"
+        android:hint="@string/addDescription"
+        android:padding="@dimen/horizontal_padding"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addPhoto"
-        >
-
-        <TextView
-            android:id="@+id/addDescriptionText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:text="@string/addDescription"
-            android:textColor="@color/black"
-            android:textSize="@dimen/textSizeCorps"
-            android:layout_gravity="center_vertical"
-            />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/addDescriptionButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:background="@drawable/add_logo"
-            android:text="addPhoto"
-            android:textSize="0dp" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/addPhoto"/>
 
     <LinearLayout
         android:id="@+id/addIngredient"
