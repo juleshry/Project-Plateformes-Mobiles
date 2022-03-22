@@ -37,14 +37,17 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/content_account_creation.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/fragment_dashboard.xml" value="0.1170940170940171" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/fragment_home.xml" value="0.26555023923444976" />
-        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/photo_popup.xml" value="0.1811965811965812" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/user_popup.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/menu/bottom_nav.xml" value="0.264" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1423076923076923" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.4" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15358649789029535" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15555555555555556" />
-        <entry key="app/src/main/res/layout/activity_account_creation.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_account.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_account_creation.xml" value="0.37642669677734375" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_new_recipe.xml" value="0.39613189697265627" />
       </map>
     </option>
   </component>

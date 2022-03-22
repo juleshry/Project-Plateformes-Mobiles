@@ -2,6 +2,7 @@ package com.example.projectplateformesmobiles
 
 
 import android.content.ActivityNotFoundException
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -14,20 +15,25 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_new_recipe.*
 
 
 class NewRecipe : AppCompatActivity() {
 
-    private companion object{
+    private companion object {
         private val REQUEST_IMAGE_CAPTURE = 1
         private val REQUEST_CODE = 100
     }
 
     private lateinit var addPhotoButton: Button
+    private lateinit var addTitle: EditText
+    private lateinit var addDescription: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,19 +44,38 @@ class NewRecipe : AppCompatActivity() {
         val view: View = inflater.inflate(R.layout.activity_new_recipe, null)
 
         addPhotoButton = findViewById(R.id.addPhotoButton)
-        addPhotoButton.setOnClickListener{ photoButtonOnClick(inflater, view)}
+        addPhotoButton.setOnClickListener { photoButtonOnClick(inflater, view) }
+        addTitle = findViewById(R.id.addTitle)
+        addDescription = findViewById(R.id.addDescription)
 
         val cancelButton: Button = findViewById(R.id.CancelNewRecipe)
         cancelButton.setOnClickListener { cancelButtonOnClick(inflater, view) }
 
         val confirmNEwRecipeButton: Button = findViewById(R.id.ConfirmNewRecipe)
-        confirmNEwRecipeButton.setOnClickListener{newRecipe()}
+        val db = Firebase.firestore
+
+        confirmNEwRecipeButton.setOnClickListener {
+            val recipe = hashMapOf(
+                "title" to addTitle.text.toString(),
+                "description" to addDescription.text.toString()
+            )
+            db.collection("recipes")
+                .add(recipe)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
+        }
+
+
 
 
     }
 
-    private fun newRecipe(){
-    }
+
+
 
     private fun photoButtonOnClick(inflater: LayoutInflater, view: View){
         val popupView: View = inflater.inflate(R.layout.photo_popup, null)
