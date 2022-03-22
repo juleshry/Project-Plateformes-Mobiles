@@ -23,6 +23,7 @@ import com.example.projectplateformesmobiles.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -54,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
             .build()
 
         val client: GoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        val signInButton: Button = findViewById(R.id.sign_in_button)
+        val signInButton: SignInButton = findViewById(R.id.sign_in_button)
         signInButton.setOnClickListener {
             val signInIntent = client.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)

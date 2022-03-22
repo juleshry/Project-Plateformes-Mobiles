@@ -7,49 +7,63 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/HomeAppBar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.ProjectPlateformesMobiles.AppBarOverlay"
-        >
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/HomeAppBar"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/white"
-            >
-            <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.ProjectPlateformesMobiles.AppBarOverlay"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="100dp"
+                android:background="@color/white">
 
-                <TextView
-                    android:id="@+id/Mes_recettes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="@string/Home_title"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="40sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/userButton"
-                    android:layout_width="63dp"
-                    android:layout_height="67dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/user"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.appcompat.widget.Toolbar>
+                    <TextView
+                        android:id="@+id/Mes_recettes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/Home_title"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+                    <Button
+                        android:id="@+id/userButton"
+                        android:layout_width="63dp"
+                        android:layout_height="67dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/user"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/username"
+                        android:textSize="0sp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/HomeAppBar">
+
+
+        </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -72,11 +86,15 @@
                 android:layout_width="59dp"
                 android:layout_height="59dp"
                 android:layout_marginTop="1.5dp"
-                android:layout_marginLeft="1.5dp"
+                android:layout_marginStart="1.5dp"
                 android:background="@drawable/new_recipe_button"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/newRecipe"
+                android:textSize="0sp"/>
         </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
