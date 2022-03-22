@@ -25,6 +25,13 @@ class NewRecipe : AppCompatActivity() {
         val cancelButton: Button = findViewById(R.id.CancelNewRecipe)
         cancelButton.setOnClickListener { cancelButtonOnClick(inflater, view) }
 
+        val confirmNEwRecipeButton: Button = findViewById(R.id.ConfirmNewRecipe)
+        confirmNEwRecipeButton.setOnClickListener{newRecipe()}
+
+
+    }
+
+    private fun newRecipe(){
     }
 
     private fun cancelButtonOnClick(inflater: LayoutInflater, view: View){
@@ -56,7 +63,6 @@ class NewRecipe : AppCompatActivity() {
             closePopupListener()
             this.finish()
         }
-
 
     }
 }

@@ -8,7 +8,7 @@ admin.initializeApp();
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
+  functions.logger.info("Hello logs!", { structuredData: true });
   response.send("Hello from Firebase!");
 });
 
@@ -17,5 +17,6 @@ exports.addUsertoFirestore = functions.auth.user().onCreate((user) => {
   return usersRef.doc(user.uid).set({
     email: user.email,
     displayName: user.displayName,
+    signinWithGoogle: true,
   });
 });

@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-android-extensions'
 }
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdk 32
@@ -64,4 +65,3 @@ dependencies {
 repositories {
     mavenCentral()
 }
-apply plugin: 'com.google.gms.google-services'

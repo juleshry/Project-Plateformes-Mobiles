@@ -40,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var auth: FirebaseAuth
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -65,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
         val loading: ProgressBar = findViewById(R.id.loading)
         val create: Button = findViewById(R.id.createAccount)
 
-        val accountCreationIntent:Intent=Intent(this, AccountCreation::class.java)
+        val accountCreationIntent:Intent = Intent(this, AccountCreation::class.java)
         val menuIntent: Intent = Intent(this, Menu::class.java)
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
@@ -152,6 +153,7 @@ class LoginActivity : AppCompatActivity() {
             return
         }
         startActivity(Intent(this,  Menu::class.java))
+
         finish()
     }
 

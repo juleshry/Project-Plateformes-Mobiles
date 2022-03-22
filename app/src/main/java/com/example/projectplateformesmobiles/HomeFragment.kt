@@ -15,6 +15,10 @@ import androidx.core.content.ContextCompat
 import com.example.projectplateformesmobiles.ui.Account
 import com.example.projectplateformesmobiles.ui.Settings
 import com.example.projectplateformesmobiles.ui.login.LoginActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.OnCompleteListener
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -95,8 +99,18 @@ class HomeFragment : Fragment() {
         logoutButton.setOnClickListener {
             Log.i("APP", "Logout")
             auth.signOut()
+
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+            val client: GoogleSignInClient = GoogleSignIn.getClient(this.requireActivity(), gso)
+            client.signOut().addOnCompleteListener(this.requireActivity(), OnCompleteListener {  })
+
             val logoutIntent = Intent(this.requireActivity(), LoginActivity::class.java)
             logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+            popupWindow.dismiss()
             startActivity(logoutIntent)
         }
     }
