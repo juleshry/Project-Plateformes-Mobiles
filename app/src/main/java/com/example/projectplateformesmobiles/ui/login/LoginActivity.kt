@@ -54,7 +54,8 @@ class LoginActivity : AppCompatActivity() {
             .build()
 
         val client: GoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        sign_in_button.setOnClickListener {
+        val signInButton: Button = findViewById(R.id.sign_in_button)
+        signInButton.setOnClickListener {
             val signInIntent = client.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
@@ -66,8 +67,8 @@ class LoginActivity : AppCompatActivity() {
         val loading: ProgressBar = findViewById(R.id.loading)
         val create: Button = findViewById(R.id.createAccount)
 
-        val accountCreationIntent:Intent = Intent(this, AccountCreation::class.java)
-        val menuIntent: Intent = Intent(this, Menu::class.java)
+        val accountCreationIntent = Intent(this, AccountCreation::class.java)
+        val menuIntent = Intent(this, Menu::class.java)
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
