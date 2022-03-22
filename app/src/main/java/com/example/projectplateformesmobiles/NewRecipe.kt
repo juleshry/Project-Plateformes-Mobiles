@@ -53,6 +53,7 @@ class NewRecipe : AppCompatActivity() {
 
         val confirmCancelButton = popupView.findViewById<Button>(R.id.ConfirmButtonPopup)
         confirmCancelButton.setOnClickListener{
+            closePopupListener()
             this.finish()
         }
 

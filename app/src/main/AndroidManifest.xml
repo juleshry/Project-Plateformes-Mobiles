@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPlateformesMobiles">
         <activity
+            android:name=".ui.Account"
+            android:exported="false" />
+        <activity
             android:name=".ui.Settings"
             android:exported="false" />
         <activity

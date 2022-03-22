@@ -12,6 +12,7 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
+import com.example.projectplateformesmobiles.ui.Account
 import com.example.projectplateformesmobiles.ui.Settings
 import com.example.projectplateformesmobiles.ui.login.LoginActivity
 
@@ -74,6 +75,13 @@ class HomeFragment : Fragment() {
 
         val closeButton: Button = popupView.findViewById(R.id.backPopup)
         closeButton.setOnClickListener{closePopupListener()}
+
+        val accountButton: Button = popupView.findViewById(R.id.accountButton)
+        accountButton.setOnClickListener{
+            closePopupListener()
+            val accountIntent = Intent(this.requireActivity(), Account::class.java)
+            startActivity(accountIntent)
+        }
 
         val settingsButton: Button = popupView.findViewById(R.id.settingsButton)
         settingsButton.setOnClickListener{

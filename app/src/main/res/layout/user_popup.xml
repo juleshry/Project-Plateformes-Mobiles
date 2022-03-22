@@ -26,38 +26,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <Button
+                android:id="@+id/accountButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/account"
-                android:textColor="@color/dark_green"
                 android:background="@color/transparent"
-                android:textAlignment="textStart"
                 android:paddingHorizontal="@dimen/fab_margin"
+                android:text="@string/account"
+                android:textAlignment="textStart"
                 android:textAllCaps="false"
-                />
+                android:textColor="@color/dark_green" />
 
             <Button
                 android:id="@+id/settingsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/settings"
-                android:textColor="@color/dark_green"
                 android:background="@color/transparent"
-                android:textAlignment="textStart"
                 android:paddingHorizontal="@dimen/fab_margin"
-                android:textAllCaps="false"/>
+                android:text="@string/settings"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_green" />
 
             <Button
                 android:id="@+id/logout_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/logout"
-                android:textColor="@color/dark_green"
                 android:background="@color/transparent"
-                android:textAlignment="textStart"
                 android:paddingHorizontal="@dimen/fab_margin"
-                android:textAllCaps="false"/>
+                android:text="@string/logout"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_green" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

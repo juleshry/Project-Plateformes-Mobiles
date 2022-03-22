@@ -41,10 +41,11 @@
     <string name="cancelString">Etes-vous sûre de vouloir annuler ?</string>
 
     <!-- Strings related to userPopup -->
-    <string name="account">Compte</string>
     <string name="logout">Déconnexion</string>
 
     <!-- Strings related to settings -->
     <string name="settings">Paramètres</string>
 
+    <!-- Strings related to account -->
+    <string name="account">Compte</string>
 </resources>
