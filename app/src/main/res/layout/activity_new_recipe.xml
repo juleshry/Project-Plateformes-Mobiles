@@ -36,146 +36,181 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <EditText
-        android:id="@+id/addTitle"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vert_field_separation"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/addTitle"
-        android:padding="@dimen/horizontal_padding"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/NewRecipeAppBarTop"/>
+        app:layout_constraintTop_toBottomOf="@id/NewRecipeAppBarTop"
+        app:layout_constraintBottom_toTopOf="@id/NewRecipeAppBarBottom">
 
-    <LinearLayout
-        android:id="@+id/addPhoto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vert_field_separation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addTitle"
-        >
 
-        <TextView
-            android:id="@+id/addPhotoText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:text="@string/addPicture"
-            android:textColor="@color/black"
-            android:textSize="@dimen/textSizeCorps"
-            android:layout_gravity="center_vertical"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <EditText
+                android:id="@+id/addTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/vert_field_separation"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/addTitle"
+                android:padding="@dimen/horizontal_padding"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
 
-        <Button
-            android:id="@+id/addPhotoButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:background="@drawable/add_photo"
-            android:text="addPhoto"
-            android:textSize="0sp" />
+            <LinearLayout
+                android:id="@+id/addPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vert_field_separation"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addTitle"
+                >
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/addPhotoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:text="@string/addPicture"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeCorps"
+                    android:layout_gravity="center_vertical"
+                    />
 
-    <EditText
-        android:id="@+id/addDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="70dp"
-        android:layout_marginTop="@dimen/vert_field_separation"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/addDescription"
-        android:padding="@dimen/horizontal_padding"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        android:inputType="textMultiLine"
-        android:gravity="top"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addPhoto"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-    <LinearLayout
-        android:id="@+id/addIngredient"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vert_field_separation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addDescription"
-        >
+                <Button
+                    android:id="@+id/addPhotoButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/add_photo"
+                    android:text="addPhoto"
+                    android:textSize="0sp" />
 
-        <TextView
-            android:id="@+id/addIngredientText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:text="@string/addIngredient"
-            android:textColor="@color/black"
-            android:textSize="@dimen/textSizeCorps"
-            android:layout_gravity="center_vertical"
-            />
+            </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <EditText
+                android:id="@+id/addDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70dp"
+                android:layout_marginTop="@dimen/vert_field_separation"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/addDescription"
+                android:padding="@dimen/horizontal_padding"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addPhoto"/>
 
-        <Button
-            android:id="@+id/addIngredientButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:background="@drawable/add_logo"
-            android:text="addPhoto"
-            android:textSize="0dp" />
+            <LinearLayout
+                android:id="@+id/addIngredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vert_field_separation"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addDescription"
+                android:orientation="vertical"
+                >
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
 
-    <LinearLayout
-        android:id="@+id/addEtape"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vert_field_separation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addIngredient"
-        >
+                    <TextView
+                        android:id="@+id/addIngredientText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:text="@string/addIngredient"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSizeCorps"
+                        android:layout_gravity="center_vertical"
+                        />
 
-        <TextView
-            android:id="@+id/addEtapeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:text="@string/addEtape"
-            android:textColor="@color/black"
-            android:textSize="@dimen/textSizeCorps"
-            android:layout_gravity="center_vertical"
-            />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/addIngredientButton"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:background="@drawable/add_logo"
+                        android:text="addPhoto"
+                        android:textSize="0dp" />
 
-        <Button
-            android:id="@+id/addEtapeButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:background="@drawable/add_logo"
-            android:text="addPhoto"
-            android:textSize="0dp" />
+                </LinearLayout>
 
-    </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/addStep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vert_field_separation"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addIngredient"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/addEtapeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:text="@string/addEtape"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSizeCorps"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/addStepButton"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:background="@drawable/add_logo"
+                        android:text="addPhoto"
+                        android:textSize="0dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
 
     <com.google.android.material.appbar.AppBarLayout

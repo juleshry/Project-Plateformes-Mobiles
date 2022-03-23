@@ -53,4 +53,8 @@
     <!-- Strings related to photoPopup -->
     <string name="takePicture">Prendre une photo</string>
     <string name="choosePicture">Choisir une photo de la galerie</string>
+
+    <!-- Strings related to photoPopup -->
+    <string name="Quantity">Quantité</string>
+    <string name="Unity">Unité</string>
 </resources>

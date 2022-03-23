@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
@@ -14,14 +15,12 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.PopupWindow
+import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginEnd
+import androidx.core.view.setMargins
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_new_recipe.*
 
 
 class NewRecipe : AppCompatActivity() {
@@ -32,8 +31,15 @@ class NewRecipe : AppCompatActivity() {
     }
 
     private lateinit var addPhotoButton: Button
+    private lateinit var addIngredientButton: Button
+    private lateinit var addIngredientLinearLayout: LinearLayout
+    private lateinit var addStepLinearLayout: LinearLayout
+    private lateinit var addStepButton: Button
     private lateinit var addTitle: EditText
     private lateinit var addDescription: EditText
+
+    private var ingredients = mutableMapOf<String, String>()
+    private var steps = mutableMapOf<String, MutableMap<String, String>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +53,19 @@ class NewRecipe : AppCompatActivity() {
         addPhotoButton.setOnClickListener { photoButtonOnClick(inflater, view) }
         addTitle = findViewById(R.id.addTitle)
         addDescription = findViewById(R.id.addDescription)
+        addIngredientLinearLayout = findViewById(R.id.addIngredient)
+        addStepLinearLayout = findViewById(R.id.addStep)
+        addIngredientButton = findViewById(R.id.addIngredientButton)
+        addStepButton = findViewById(R.id.addStepButton)
+
+        addIngredientButton.setOnClickListener {
+            addIngredient(inflater, view)
+        }
+
+        addStepButton.setOnClickListener {
+            addStep(inflater, view)
+        }
+
 
         val cancelButton: Button = findViewById(R.id.CancelNewRecipe)
         cancelButton.setOnClickListener { cancelButtonOnClick(inflater, view) }
@@ -55,29 +74,37 @@ class NewRecipe : AppCompatActivity() {
         val db = Firebase.firestore
 
         confirmNEwRecipeButton.setOnClickListener {
-            val recipe = hashMapOf(
-                "title" to addTitle.text.toString(),
-                "description" to addDescription.text.toString()
-            )
-            db.collection("recipes")
-                .add(recipe)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error adding document", e)
-                }
+            if (addTitle.text.toString() != "" && addDescription.text.toString() != ""
+                && ingredients.isNotEmpty()
+            ) {
+                val recipe = hashMapOf(
+                    "title" to addTitle.text.toString(),
+                    "description" to addDescription.text.toString(),
+                    "ingredients" to ingredients,
+                    "steps" to steps
+                )
+                db.collection("recipes")
+                    .add(recipe)
+                    .addOnSuccessListener { documentReference ->
+                        Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Error adding document", e)
+                    }
+                this.finish()
+            } else Toast
+                .makeText(
+                    this.applicationContext,
+                    "Il manque des informations",
+                    Toast.LENGTH_SHORT
+                )
+                .show()
         }
-
-
-
 
     }
 
 
-
-
-    private fun photoButtonOnClick(inflater: LayoutInflater, view: View){
+    private fun photoButtonOnClick(inflater: LayoutInflater, view: View) {
         val popupView: View = inflater.inflate(R.layout.photo_popup, null)
 
         val width: Int = LinearLayout.LayoutParams.MATCH_PARENT
@@ -89,16 +116,16 @@ class NewRecipe : AppCompatActivity() {
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
-        fun closePopupListener(){
+        fun closePopupListener() {
             this.window.statusBarColor = ContextCompat.getColor(this, R.color.white)
             popupWindow.dismiss()
         }
 
         val closeButton: Button = popupView.findViewById(R.id.backPopup)
-        closeButton.setOnClickListener{closePopupListener()}
+        closeButton.setOnClickListener { closePopupListener() }
 
         val takePictureButton: Button = popupView.findViewById(R.id.takePictureButton)
-        takePictureButton.setOnClickListener{
+        takePictureButton.setOnClickListener {
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
@@ -109,10 +136,10 @@ class NewRecipe : AppCompatActivity() {
         }
 
         val choosePictureButton: Button = popupView.findViewById(R.id.choosePictureButton)
-        choosePictureButton.setOnClickListener{
+        choosePictureButton.setOnClickListener {
             val openGalleryIntent = Intent(Intent.ACTION_PICK)
             openGalleryIntent.type = "image/*"
-            startActivityForResult(openGalleryIntent,REQUEST_CODE)
+            startActivityForResult(openGalleryIntent, REQUEST_CODE)
             popupWindow.dismiss()
         }
     }
@@ -123,13 +150,13 @@ class NewRecipe : AppCompatActivity() {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             addPhotoButton.background = BitmapDrawable(resources, imageBitmap)
         }
-        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             addPhotoButton.background = Drawable.createFromPath(data?.dataString)
         }
     }
 
 
-    private fun cancelButtonOnClick(inflater: LayoutInflater, view: View){
+    private fun cancelButtonOnClick(inflater: LayoutInflater, view: View) {
 
         val popupView: View = inflater.inflate(R.layout.cancel_popup, null)
 
@@ -143,21 +170,172 @@ class NewRecipe : AppCompatActivity() {
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
 
-        fun closePopupListener(){
+        fun closePopupListener() {
             this.window.statusBarColor = ContextCompat.getColor(this, R.color.white)
             popupWindow.dismiss()
         }
 
         val closeButton: Button = popupView.findViewById(R.id.backPopup)
-        closeButton.setOnClickListener{closePopupListener()}
+        closeButton.setOnClickListener { closePopupListener() }
 
         val continuePopupButton = popupView.findViewById<Button>(R.id.ContinueButtonPopup)
-        continuePopupButton.setOnClickListener{closePopupListener()}
+        continuePopupButton.setOnClickListener { closePopupListener() }
 
         val confirmCancelButton = popupView.findViewById<Button>(R.id.ConfirmButtonPopup)
-        confirmCancelButton.setOnClickListener{
+        confirmCancelButton.setOnClickListener {
             closePopupListener()
             this.finish()
+        }
+
+    }
+
+    private fun addIngredient(inflater: LayoutInflater, view: View) {
+        val popupView: View = inflater.inflate(R.layout.add_ingredient_popup, null)
+
+        val width: Int = LinearLayout.LayoutParams.MATCH_PARENT
+        val height: Int = LinearLayout.LayoutParams.MATCH_PARENT
+        val focusable = true
+        val popupWindow = PopupWindow(popupView, width, height, focusable)
+
+        this.window.statusBarColor = ContextCompat.getColor(this, R.color.semiTransparent)
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
+
+
+        fun closePopupListener() {
+            this.window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+            popupWindow.dismiss()
+        }
+
+        val closeButton: Button = popupView.findViewById(R.id.backPopup)
+        closeButton.setOnClickListener { closePopupListener() }
+
+        val addIngredientEditText: EditText = popupView.findViewById(R.id.addEditText)
+        val addQuantityEditText: EditText = popupView.findViewById(R.id.addQuantityEditText)
+        val addUnityEditText: EditText = popupView.findViewById(R.id.addUnityEditText)
+
+        val confirmNewIngredientButton: Button = popupView.findViewById(R.id.confirmNewRecipePopup)
+        confirmNewIngredientButton.setOnClickListener {
+            if (addIngredientEditText.text.toString() != "") {
+                val params = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                val newTextView = TextView(this.applicationContext)
+                if (addQuantityEditText.text.toString() != "")
+                    newTextView.text =
+                        addIngredientEditText.text.toString() + " x" + addQuantityEditText.text.toString() + addUnityEditText.text.toString()
+                else
+                    newTextView.text = addIngredientEditText.text.toString()
+                newTextView.setTextColor(Color.BLACK)
+                newTextView.textSize = 17f
+                newTextView.paintFlags = 0
+
+                params.marginStart =
+                    resources.getDimension(R.dimen.activity_horizontal_margin).toInt() + 50
+
+                newTextView.layoutParams = params
+                addIngredientLinearLayout.addView(newTextView)
+                ingredients.set(
+                    addIngredientEditText.text.toString(),
+                    addQuantityEditText.text.toString() + addUnityEditText.text.toString()
+                )
+            }
+            popupWindow.dismiss()
+        }
+
+    }
+
+    private fun addStep(inflater: LayoutInflater, view: View) {
+        val popupView: View = inflater.inflate(R.layout.add_step_popup, null)
+
+        val width: Int = LinearLayout.LayoutParams.MATCH_PARENT
+        val height: Int = LinearLayout.LayoutParams.MATCH_PARENT
+        val focusable = true
+        val popupWindow = PopupWindow(popupView, width, height, focusable)
+
+        this.window.statusBarColor = ContextCompat.getColor(this, R.color.semiTransparent)
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
+
+
+        fun closePopupListener() {
+            this.window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+            popupWindow.dismiss()
+        }
+
+        val closeButton: Button = popupView.findViewById(R.id.backPopup)
+        closeButton.setOnClickListener { closePopupListener() }
+
+        val addStepTitleEditText: EditText = popupView.findViewById(R.id.addStepTitleEditText)
+        val addStepDescriptionEditText: EditText = popupView.findViewById(R.id.addStepDescriptionEditText)
+
+        val stepGrid: GridLayout = popupView.findViewById(R.id.addStepGrid)
+        val buttons = mutableSetOf<Button>()
+        for ((k, v) in ingredients) {
+            val newButton = ToggleButton(this.applicationContext)
+            val params = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            newButton.text = k
+            newButton.textOff = k
+            newButton.textOn = k
+            newButton.background = resources.getDrawable(R.drawable.light_button)
+            newButton.setTextColor(resources.getColor(R.color.dark_green))
+
+            params.setMargins(10)
+            newButton.layoutParams = params
+
+            newButton.setOnCheckedChangeListener { _, isChecked ->
+                if(isChecked) {
+                    newButton.background = resources.getDrawable(R.drawable.plain_button)
+                    newButton.setTextColor(resources.getColor(R.color.white))
+                    buttons.add(newButton)
+                } else {
+                    newButton.background = resources.getDrawable(R.drawable.light_button)
+                    newButton.setTextColor(resources.getColor(R.color.dark_green))
+                    buttons.remove(newButton)
+                }
+            }
+            stepGrid.addView(newButton)
+        }
+
+        val confirmNewStepButton: Button = popupView.findViewById(R.id.confirmNewStepPopup)
+        confirmNewStepButton.setOnClickListener {
+
+                      if(addStepTitleEditText.text.toString() != ""
+                          && addStepDescriptionEditText.text.toString() != ""){
+
+                          val params = LinearLayout.LayoutParams(
+                              LinearLayout.LayoutParams.MATCH_PARENT,
+                              LinearLayout.LayoutParams.WRAP_CONTENT
+                          )
+                          val newTextView = TextView(this.applicationContext)
+                          newTextView.text = addStepTitleEditText.text.toString()
+                          newTextView.setTextColor(Color.BLACK)
+                          newTextView.textSize = 17f
+                          newTextView.paintFlags = 0
+
+                          params.marginStart =
+                              resources.getDimension(R.dimen.activity_horizontal_margin).toInt() + 50
+
+                          newTextView.layoutParams = params
+                          addStepLinearLayout.addView(newTextView)
+
+                          var saveIngredient = ""
+                          for(b in buttons){
+                              saveIngredient += b.text.toString() + ", "
+                          }
+                          steps.set(addStepTitleEditText.text.toString(),
+                              mutableMapOf("ingredients" to saveIngredient,
+                                  "description" to addStepDescriptionEditText.text.toString()))
+
+                          popupWindow.dismiss()
+                      } else {
+                          Toast.makeText(this.applicationContext, "Il manque des informations", Toast.LENGTH_SHORT)
+                              .show()
+                      }
         }
 
     }
