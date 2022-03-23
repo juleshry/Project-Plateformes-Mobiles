@@ -14,6 +14,7 @@ import android.view.Gravity
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.view.setMargins
 import com.example.projectplateformesmobiles.ui.Account
 import com.example.projectplateformesmobiles.ui.Settings
 import com.example.projectplateformesmobiles.ui.login.LoginActivity
@@ -21,14 +22,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
-
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import kotlin.reflect.typeOf
 
 
 /**
@@ -55,6 +53,7 @@ class HomeFragment : Fragment() {
         val newRecipeButton: Button = fragmentView.findViewById<Button>(R.id.newRecipeButton)
         newRecipeButton.setOnClickListener {
             startActivity(newRecipeIntent)
+            activity?.fragmentManager?.popBackStack()
         }
 
         val userButton: Button = fragmentView.findViewById(R.id.userButton)
@@ -137,32 +136,41 @@ class HomeFragment : Fragment() {
         )
 
         val db = Firebase.firestore
-        var userRecipes: ArrayList<String>?  = arrayListOf<String>()
-        val homeRecipesLinearLayout: LinearLayout =
-            fragmentView.findViewById(R.id.homeRecipesLinearLayout)
-        homeRecipesLinearLayout.removeAllViews()
+        var userRecipes: ArrayList<String>? = arrayListOf<String>()
+        val homeRecipesGridLayout: GridLayout =
+            fragmentView.findViewById(R.id.homeRecipesGridLayout)
+        homeRecipesGridLayout.removeAllViews()
         val user = Firebase.auth.currentUser?.let {
             var userRef = db.collection("users").document(it.uid)
             userRef.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         userRecipes = document.get("recipes") as ArrayList<String>?
-                        if(userRecipes!= null) {
+                        if (userRecipes != null) {
                             for (r in userRecipes!!) {
                                 val recipeRef = db.collection("recipes").document(r)
                                 recipeRef.get()
                                     .addOnSuccessListener { recipeDocument ->
                                         val recipeTitle = recipeDocument.get("title")
                                         val recipeDescription = recipeDocument.get("description")
-                                        val recipeIngredients: HashMap<String, String> =
-                                            recipeDocument.get("ingredients") as HashMap<String, String>
 
+                                        val p = GridLayout.LayoutParams()
+                                        val cardViewParams = GridLayout.LayoutParams()
+                                        cardViewParams.columnSpec = GridLayout.spec(
+                                            GridLayout.UNDEFINED,
+                                            GridLayout.FILL, 1f
+                                        )
+                                        cardViewParams.width = 0
+                                        cardViewParams.setMargins(20)
                                         val newCardView = CardView(this.requireContext())
-                                        newCardView.layoutParams = params
+                                        newCardView.layoutParams = cardViewParams
+                                        newCardView.radius = 30f
+
 
                                         val newLinearLayout = LinearLayout(this.requireContext())
                                         newLinearLayout.orientation = LinearLayout.VERTICAL
                                         newLinearLayout.layoutParams = params
+                                        newLinearLayout.setPadding(0, 0, 0, 30)
                                         newCardView.addView(newLinearLayout)
 
                                         val recipeImage = ImageView(this.requireContext())
@@ -178,8 +186,8 @@ class HomeFragment : Fragment() {
                                                             0,
                                                             image.size
                                                         ),
-                                                        200,
-                                                        200,
+                                                        500,
+                                                        500,
                                                         true
                                                     )
                                                 )
@@ -192,41 +200,27 @@ class HomeFragment : Fragment() {
                                         newTitle.setTextColor(Color.BLACK)
                                         newTitle.textSize =
                                             resources.getDimension(R.dimen.RecipetextSizeTitle)
+                                        newTitle.setPadding(20, 0, 0, 0)
+
+                                        val descriptionSubTitle = TextView(this.requireContext())
+                                        descriptionSubTitle.text = "Description : "
+                                        descriptionSubTitle.setTextColor(Color.BLACK)
+                                        descriptionSubTitle.textSize =
+                                            resources.getDimension(R.dimen.RecipetextSizeSubTitle)
+                                        descriptionSubTitle.setPadding(20, 0, 0, 0)
 
                                         val newDescr = TextView(this.requireContext())
                                         newDescr.text = recipeDescription.toString()
                                         newDescr.setTextColor(Color.BLACK)
                                         newDescr.textSize =
                                             resources.getDimension(R.dimen.RecipetextSizeCorps)
-
-                                        val ingredientsLinearLayout =
-                                            LinearLayout(this.requireContext())
-                                        ingredientsLinearLayout.orientation = LinearLayout.VERTICAL
-                                        ingredientsLinearLayout.layoutParams = params
-                                        val ingredientsTextView = TextView(this.requireContext())
-                                        ingredientsTextView.text = "Ingrédients : "
-                                        ingredientsTextView.setTextColor(Color.BLACK)
-                                        ingredientsTextView.textSize =
-                                            resources.getDimension(R.dimen.RecipetextSizeCorps)
-                                        ingredientsLinearLayout.addView(ingredientsTextView)
-                                        for ((k, v) in recipeIngredients) {
-                                            val ingredient = TextView(this.requireContext())
-                                            if (v.toString() != "")
-                                                ingredient.text = k + " x" + v
-                                            else
-                                                ingredient.text = k
-                                            ingredient.setTextColor(Color.BLACK)
-                                            ingredient.textSize =
-                                                resources.getDimension(R.dimen.RecipetextSizeIngredients)
-                                            ingredientsLinearLayout.addView(ingredient)
-                                        }
-
+                                        newDescr.setPadding(40, 0, 0, 0)
 
                                         newLinearLayout.addView(newTitle)
+                                        newLinearLayout.addView(descriptionSubTitle)
                                         newLinearLayout.addView(newDescr)
-                                        newLinearLayout.addView(ingredientsLinearLayout)
 
-                                        homeRecipesLinearLayout.addView(newCardView)
+                                        homeRecipesGridLayout.addView(newCardView)
                                     }
                                     .addOnFailureListener { exception ->
                                         Log.d("Error", "get failed with ", exception)

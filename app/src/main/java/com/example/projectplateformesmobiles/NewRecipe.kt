@@ -110,6 +110,7 @@ class NewRecipe : AppCompatActivity() {
 
                             }.addOnSuccessListener { taskSnapshot ->
                                 Log.w(TAG, "image enregistrée")
+                                this.finish()
                             }
                         }
 
@@ -121,9 +122,6 @@ class NewRecipe : AppCompatActivity() {
                     .addOnFailureListener { e ->
                         Log.w(TAG, "Error adding document", e)
                     }
-
-
-                this.finish()
             } else Toast
                 .makeText(
                     this.applicationContext,
@@ -165,7 +163,7 @@ class NewRecipe : AppCompatActivity() {
             } catch (e: ActivityNotFoundException) {
                 Log.w("error", e)
             }
-            popupWindow.dismiss()
+            closePopupListener()
         }
 
         val choosePictureButton: Button = popupView.findViewById(R.id.choosePictureButton)
@@ -173,7 +171,7 @@ class NewRecipe : AppCompatActivity() {
             val openGalleryIntent = Intent(Intent.ACTION_PICK)
             openGalleryIntent.type = "image/*"
             startActivityForResult(openGalleryIntent, REQUEST_CODE)
-            popupWindow.dismiss()
+            closePopupListener()
         }
     }
 
@@ -272,7 +270,7 @@ class NewRecipe : AppCompatActivity() {
                 addIngredientLinearLayout.addView(newTextView)
                 ingredients[addIngredientEditText.text.toString()] = addQuantityEditText.text.toString() + addUnityEditText.text.toString()
             }
-            popupWindow.dismiss()
+            closePopupListener()
         }
 
     }

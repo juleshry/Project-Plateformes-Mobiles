@@ -57,24 +57,33 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="110dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/HomeAppBar">
+            app:layout_constraintTop_toBottomOf="@id/HomeAppBar"
+            tools:ignore="SpeakableTextPresentCheck">
 
-            <LinearLayout
-                android:id="@+id/homeRecipesLinearLayout"
+            <GridLayout
+                android:id="@+id/homeRecipesGridLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_gravity="fill"
+                android:columnCount="2"
+                >
 
-            </LinearLayout>
+            </GridLayout>
 
         </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        >
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
