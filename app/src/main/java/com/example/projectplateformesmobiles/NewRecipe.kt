@@ -75,7 +75,7 @@ class NewRecipe : AppCompatActivity() {
 
         confirmNEwRecipeButton.setOnClickListener {
             if (addTitle.text.toString() != "" && addDescription.text.toString() != ""
-                && ingredients.isNotEmpty()
+                && ingredients.isNotEmpty() && steps.isNotEmpty()
             ) {
                 val recipe = hashMapOf(
                     "title" to addTitle.text.toString(),
