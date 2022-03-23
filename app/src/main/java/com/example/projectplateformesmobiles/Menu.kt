@@ -14,8 +14,6 @@ class Menu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        val recipesLayout : RecyclerView = findViewById(R.id.listOfRecipes)
-
 
     }
 

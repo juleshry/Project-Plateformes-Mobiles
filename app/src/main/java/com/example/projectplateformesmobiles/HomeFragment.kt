@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.util.Log
 import android.view.Gravity
-import android.widget.LinearLayout
-import android.widget.PopupWindow
+import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.example.projectplateformesmobiles.ui.Account
 import com.example.projectplateformesmobiles.ui.Settings
@@ -22,7 +24,11 @@ import com.google.android.gms.tasks.OnCompleteListener
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import kotlin.reflect.typeOf
 
 
 /**
@@ -32,10 +38,9 @@ import com.google.firebase.ktx.Firebase
  */
 class HomeFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    val ONE_MEGABYTE: Long = 1024 * 1024
 
-    }
+    protected lateinit var fragmentView: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,23 +48,30 @@ class HomeFragment : Fragment() {
     ): View {
 
         // Inflate the layout for this fragment
-        val view: View =  inflater.inflate(R.layout.fragment_home, container, false)
+        fragmentView = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val newRecipeIntent = Intent(getActivity(), NewRecipe::class.java)
-        val newRecipeButton: Button = view.findViewById<Button>(R.id.newRecipeButton)
-        newRecipeButton.setOnClickListener{
+
+        val newRecipeIntent = Intent(activity, NewRecipe::class.java)
+        val newRecipeButton: Button = fragmentView.findViewById<Button>(R.id.newRecipeButton)
+        newRecipeButton.setOnClickListener {
             startActivity(newRecipeIntent)
         }
 
-        val userButton: Button = view.findViewById(R.id.userButton)
-        userButton.setOnClickListener{
-            userButtonOnClickListener(inflater, view)
+        val userButton: Button = fragmentView.findViewById(R.id.userButton)
+        userButton.setOnClickListener {
+            userButtonOnClickListener(inflater, fragmentView)
         }
 
-        return view
+        return fragmentView
     }
 
-    private fun userButtonOnClickListener(inflater: LayoutInflater, view: View){
+    override fun onResume() {
+        super.onResume()
+
+        showRecipes()
+    }
+
+    private fun userButtonOnClickListener(inflater: LayoutInflater, view: View) {
         val popupView: View = inflater.inflate(R.layout.user_popup, null)
 
         val width: Int = LinearLayout.LayoutParams.MATCH_PARENT
@@ -67,28 +79,30 @@ class HomeFragment : Fragment() {
         val focusable = true
         val popupWindow = PopupWindow(popupView, width, height, focusable)
 
-        this.requireActivity().window.statusBarColor = ContextCompat.getColor(this.requireActivity(), R.color.semiTransparent)
+        this.requireActivity().window.statusBarColor =
+            ContextCompat.getColor(this.requireActivity(), R.color.semiTransparent)
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
 
-        fun closePopupListener(){
-            this.requireActivity().window.statusBarColor = ContextCompat.getColor(this.requireActivity(), R.color.white)
+        fun closePopupListener() {
+            this.requireActivity().window.statusBarColor =
+                ContextCompat.getColor(this.requireActivity(), R.color.white)
             popupWindow.dismiss()
         }
 
         val closeButton: Button = popupView.findViewById(R.id.backPopup)
-        closeButton.setOnClickListener{closePopupListener()}
+        closeButton.setOnClickListener { closePopupListener() }
 
         val accountButton: Button = popupView.findViewById(R.id.accountButton)
-        accountButton.setOnClickListener{
+        accountButton.setOnClickListener {
             closePopupListener()
             val accountIntent = Intent(this.requireActivity(), Account::class.java)
             startActivity(accountIntent)
         }
 
         val settingsButton: Button = popupView.findViewById(R.id.settingsButton)
-        settingsButton.setOnClickListener{
+        settingsButton.setOnClickListener {
             closePopupListener()
             val settingsIntent = Intent(this.requireActivity(), Settings::class.java)
             startActivity(settingsIntent)
@@ -105,13 +119,126 @@ class HomeFragment : Fragment() {
                 .requestEmail()
                 .build()
             val client: GoogleSignInClient = GoogleSignIn.getClient(this.requireActivity(), gso)
-            client.signOut().addOnCompleteListener(this.requireActivity(), OnCompleteListener {  })
+            client.signOut().addOnCompleteListener(this.requireActivity(), OnCompleteListener { })
 
             val logoutIntent = Intent(this.requireActivity(), LoginActivity::class.java)
             logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
             popupWindow.dismiss()
             startActivity(logoutIntent)
+        }
+    }
+
+
+    private fun showRecipes() {
+        val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        val db = Firebase.firestore
+        var userRecipes: ArrayList<String>?  = arrayListOf<String>()
+        val homeRecipesLinearLayout: LinearLayout =
+            fragmentView.findViewById(R.id.homeRecipesLinearLayout)
+        homeRecipesLinearLayout.removeAllViews()
+        val user = Firebase.auth.currentUser?.let {
+            var userRef = db.collection("users").document(it.uid)
+            userRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        userRecipes = document.get("recipes") as ArrayList<String>?
+                        if(userRecipes!= null) {
+                            for (r in userRecipes!!) {
+                                val recipeRef = db.collection("recipes").document(r)
+                                recipeRef.get()
+                                    .addOnSuccessListener { recipeDocument ->
+                                        val recipeTitle = recipeDocument.get("title")
+                                        val recipeDescription = recipeDocument.get("description")
+                                        val recipeIngredients: HashMap<String, String> =
+                                            recipeDocument.get("ingredients") as HashMap<String, String>
+
+                                        val newCardView = CardView(this.requireContext())
+                                        newCardView.layoutParams = params
+
+                                        val newLinearLayout = LinearLayout(this.requireContext())
+                                        newLinearLayout.orientation = LinearLayout.VERTICAL
+                                        newLinearLayout.layoutParams = params
+                                        newCardView.addView(newLinearLayout)
+
+                                        val recipeImage = ImageView(this.requireContext())
+
+                                        val imageRef =
+                                            FirebaseStorage.getInstance().reference.child(r)
+                                        imageRef.getBytes(ONE_MEGABYTE)
+                                            .addOnSuccessListener { image ->
+                                                recipeImage.setImageBitmap(
+                                                    Bitmap.createScaledBitmap(
+                                                        BitmapFactory.decodeByteArray(
+                                                            image,
+                                                            0,
+                                                            image.size
+                                                        ),
+                                                        200,
+                                                        200,
+                                                        true
+                                                    )
+                                                )
+                                            }
+
+                                        newLinearLayout.addView(recipeImage)
+
+                                        val newTitle = TextView(this.requireContext())
+                                        newTitle.text = recipeTitle.toString()
+                                        newTitle.setTextColor(Color.BLACK)
+                                        newTitle.textSize =
+                                            resources.getDimension(R.dimen.RecipetextSizeTitle)
+
+                                        val newDescr = TextView(this.requireContext())
+                                        newDescr.text = recipeDescription.toString()
+                                        newDescr.setTextColor(Color.BLACK)
+                                        newDescr.textSize =
+                                            resources.getDimension(R.dimen.RecipetextSizeCorps)
+
+                                        val ingredientsLinearLayout =
+                                            LinearLayout(this.requireContext())
+                                        ingredientsLinearLayout.orientation = LinearLayout.VERTICAL
+                                        ingredientsLinearLayout.layoutParams = params
+                                        val ingredientsTextView = TextView(this.requireContext())
+                                        ingredientsTextView.text = "Ingrédients : "
+                                        ingredientsTextView.setTextColor(Color.BLACK)
+                                        ingredientsTextView.textSize =
+                                            resources.getDimension(R.dimen.RecipetextSizeCorps)
+                                        ingredientsLinearLayout.addView(ingredientsTextView)
+                                        for ((k, v) in recipeIngredients) {
+                                            val ingredient = TextView(this.requireContext())
+                                            if (v.toString() != "")
+                                                ingredient.text = k + " x" + v
+                                            else
+                                                ingredient.text = k
+                                            ingredient.setTextColor(Color.BLACK)
+                                            ingredient.textSize =
+                                                resources.getDimension(R.dimen.RecipetextSizeIngredients)
+                                            ingredientsLinearLayout.addView(ingredient)
+                                        }
+
+
+                                        newLinearLayout.addView(newTitle)
+                                        newLinearLayout.addView(newDescr)
+                                        newLinearLayout.addView(ingredientsLinearLayout)
+
+                                        homeRecipesLinearLayout.addView(newCardView)
+                                    }
+                                    .addOnFailureListener { exception ->
+                                        Log.d("Error", "get failed with ", exception)
+                                    }
+                            }
+                        }
+                    } else
+                        Log.d("Error", "Ce document n'existe pas")
+                }
+                .addOnFailureListener { exception ->
+                    Log.d("Error", "get failed with ", exception)
+                }
         }
     }
 

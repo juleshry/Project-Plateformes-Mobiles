@@ -16,6 +16,6 @@ exports.addUsertoFirestore = functions.auth.user().onCreate((user) => {
   const usersRef = admin.firestore().collection("users");
   return usersRef.doc(user.uid).set({
     email: user.email,
-    recipes: {},
+    recipes: [],
   });
 });

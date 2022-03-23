@@ -46,14 +46,4 @@
       android:orientation="vertical"
       app:layout_constraintGuide_begin="0dp" />
 
-  <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/listOfRecipes"
-      android:layout_width="346dp"
-      android:layout_height="195dp"
-      app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
-      app:layout_constraintEnd_toEndOf="@+id/nav_fragment"
-      app:layout_constraintHorizontal_bias="0.492"
-      app:layout_constraintStart_toStartOf="@+id/nav_fragment"
-      app:layout_constraintTop_toTopOf="@+id/nav_fragment" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

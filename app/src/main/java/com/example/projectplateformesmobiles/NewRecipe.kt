@@ -43,7 +43,6 @@ class NewRecipe : AppCompatActivity() {
     private lateinit var addTitle: EditText
     private lateinit var addDescription: EditText
     private lateinit var recipeImage: Drawable
-    public lateinit var recipeId: String
 
     private var ingredients = mutableMapOf<String, String>()
     private var steps = mutableMapOf<String, MutableMap<String, String>>()
@@ -52,7 +51,7 @@ class NewRecipe : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_recipe)
-        var storageReference = FirebaseStorage.getInstance().getReference()
+        storageReference = FirebaseStorage.getInstance().reference
 
 
         val inflater: LayoutInflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -103,7 +102,7 @@ class NewRecipe : AppCompatActivity() {
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                         val data = baos.toByteArray()
                         val imageRef = storageReference?.child(documentReference.id)
-                        var uploadTask = imageRef?.putBytes(data)
+                        val uploadTask = imageRef?.putBytes(data)
                         if (uploadTask != null) {
                             uploadTask.addOnFailureListener {
                                 // Handle unsuccessful uploads
@@ -271,10 +270,7 @@ class NewRecipe : AppCompatActivity() {
 
                 newTextView.layoutParams = params
                 addIngredientLinearLayout.addView(newTextView)
-                ingredients.set(
-                    addIngredientEditText.text.toString(),
-                    addQuantityEditText.text.toString() + addUnityEditText.text.toString()
-                )
+                ingredients[addIngredientEditText.text.toString()] = addQuantityEditText.text.toString() + addUnityEditText.text.toString()
             }
             popupWindow.dismiss()
         }
@@ -366,7 +362,7 @@ class NewRecipe : AppCompatActivity() {
                               mutableMapOf("ingredients" to saveIngredient,
                                   "description" to addStepDescriptionEditText.text.toString()))
 
-                          popupWindow.dismiss()
+                          closePopupListener()
                       } else {
                           Toast.makeText(this.applicationContext, "Il manque des informations", Toast.LENGTH_SHORT)
                               .show()
