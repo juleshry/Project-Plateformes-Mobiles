@@ -15,7 +15,7 @@ class Menu : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         val recipesLayout : RecyclerView = findViewById(R.id.listOfRecipes)
-        
+
 
     }
 

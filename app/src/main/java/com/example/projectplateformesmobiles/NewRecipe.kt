@@ -8,7 +8,6 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -16,11 +15,17 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginEnd
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.setMargins
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.io.ByteArrayOutputStream
 
 
 class NewRecipe : AppCompatActivity() {
@@ -37,13 +42,18 @@ class NewRecipe : AppCompatActivity() {
     private lateinit var addStepButton: Button
     private lateinit var addTitle: EditText
     private lateinit var addDescription: EditText
+    private lateinit var recipeImage: Drawable
+    public lateinit var recipeId: String
 
     private var ingredients = mutableMapOf<String, String>()
     private var steps = mutableMapOf<String, MutableMap<String, String>>()
+    var storageReference: StorageReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_recipe)
+        var storageReference = FirebaseStorage.getInstance().getReference()
+
 
         val inflater: LayoutInflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -75,7 +85,7 @@ class NewRecipe : AppCompatActivity() {
 
         confirmNEwRecipeButton.setOnClickListener {
             if (addTitle.text.toString() != "" && addDescription.text.toString() != ""
-                && ingredients.isNotEmpty() && steps.isNotEmpty()
+                && ingredients.isNotEmpty() && steps.isNotEmpty() && recipeImage != null
             ) {
                 val recipe = hashMapOf(
                     "title" to addTitle.text.toString(),
@@ -83,14 +93,37 @@ class NewRecipe : AppCompatActivity() {
                     "ingredients" to ingredients,
                     "steps" to steps
                 )
+
                 db.collection("recipes")
                     .add(recipe)
                     .addOnSuccessListener { documentReference ->
                         Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                        val bitmap = recipeImage.toBitmap()
+                        val baos = ByteArrayOutputStream()
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                        val data = baos.toByteArray()
+                        val imageRef = storageReference?.child(documentReference.id)
+                        var uploadTask = imageRef?.putBytes(data)
+                        if (uploadTask != null) {
+                            uploadTask.addOnFailureListener {
+                                // Handle unsuccessful uploads
+                                Log.w(TAG, "image non enregistrée")
+
+                            }.addOnSuccessListener { taskSnapshot ->
+                                Log.w(TAG, "image enregistrée")
+                            }
+                        }
+
+                        Firebase.auth.currentUser?.let {
+                            var userRef = db.collection("users").document(it.uid)
+                            userRef.update("recipes", FieldValue.arrayUnion(documentReference.id))
+                        }
                     }
                     .addOnFailureListener { e ->
                         Log.w(TAG, "Error adding document", e)
                     }
+
+
                 this.finish()
             } else Toast
                 .makeText(
@@ -104,7 +137,8 @@ class NewRecipe : AppCompatActivity() {
     }
 
 
-    private fun photoButtonOnClick(inflater: LayoutInflater, view: View) {
+
+        private fun photoButtonOnClick(inflater: LayoutInflater, view: View) {
         val popupView: View = inflater.inflate(R.layout.photo_popup, null)
 
         val width: Int = LinearLayout.LayoutParams.MATCH_PARENT
@@ -153,6 +187,7 @@ class NewRecipe : AppCompatActivity() {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             addPhotoButton.background = Drawable.createFromPath(data?.dataString)
         }
+        recipeImage = addPhotoButton.background
     }
 
 
