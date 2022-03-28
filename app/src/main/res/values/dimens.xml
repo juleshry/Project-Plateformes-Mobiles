@@ -2,12 +2,24 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">32dp</dimen>
     <dimen name="bottom_horizontal_margin">40dp</dimen>
+    <dimen name="bottom_vertical_margin">15dp</dimen>
+    <dimen name="bottom_parent_margin">20dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="vert_field_separation">25dp</dimen>
+
+    <!-- CardView Recipe -->
     <dimen name="RecipetextSizeTitle">15sp</dimen>
-    <dimen name="RecipetextSizeSubTitle">7sp</dimen>
+    <dimen name="RecipetextSizeSubTitle">6sp</dimen>
     <dimen name="RecipetextSizeCorps">5sp</dimen>
+
+    <!-- Activity Recipe -->
+    <dimen name="RecipeActivitySubTitle">30sp</dimen>
+    <dimen name="RecipeActivityDescription">20sp</dimen>
+    <dimen name="RecipeActivityIngredients">7sp</dimen>
+    <dimen name="RecipeMargin">15dp</dimen>
+
+
     <dimen name="textSizeCorps">20sp</dimen>
     <dimen name="design_bottom_navigation_height" tools:override="true">10dp</dimen>
     <dimen name="logo_separation">50dp</dimen>

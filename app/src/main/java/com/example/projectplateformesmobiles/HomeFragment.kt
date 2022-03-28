@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.view.setMargins
 import com.example.projectplateformesmobiles.ui.Account
+import com.example.projectplateformesmobiles.ui.Recipe
 import com.example.projectplateformesmobiles.ui.Settings
 import com.example.projectplateformesmobiles.ui.login.LoginActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -204,7 +205,6 @@ class HomeFragment : Fragment() {
 
                                         val descriptionSubTitle = TextView(this.requireContext())
                                         descriptionSubTitle.text = "Description : "
-                                        descriptionSubTitle.setTextColor(Color.BLACK)
                                         descriptionSubTitle.textSize =
                                             resources.getDimension(R.dimen.RecipetextSizeSubTitle)
                                         descriptionSubTitle.setPadding(20, 0, 0, 0)
@@ -219,6 +219,16 @@ class HomeFragment : Fragment() {
                                         newLinearLayout.addView(newTitle)
                                         newLinearLayout.addView(descriptionSubTitle)
                                         newLinearLayout.addView(newDescr)
+
+                                        newCardView.setOnClickListener{
+                                            val recipeIntent = Intent(this.requireContext(), Recipe::class.java)
+
+                                            recipeIntent.putExtra("Title", newTitle.text.toString())
+                                            recipeIntent.putExtra("Description", newDescr.text.toString())
+                                            recipeIntent.putExtra("ID", r)
+
+                                            startActivity(recipeIntent)
+                                        }
 
                                         homeRecipesGridLayout.addView(newCardView)
                                     }

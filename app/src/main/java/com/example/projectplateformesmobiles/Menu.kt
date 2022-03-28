@@ -2,7 +2,6 @@ package com.example.projectplateformesmobiles
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.RecyclerView
 
 
 class Menu : AppCompatActivity() {
