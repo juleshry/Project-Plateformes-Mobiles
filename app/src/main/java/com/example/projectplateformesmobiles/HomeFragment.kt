@@ -37,7 +37,7 @@ import com.google.firebase.storage.FirebaseStorage
  */
 class HomeFragment : Fragment() {
 
-    val ONE_MEGABYTE: Long = 1024 * 1024
+    private val ONE_MEGABYTE: Long = 1024 * 1024
 
     protected lateinit var fragmentView: View
 

@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -182,7 +183,8 @@ class NewRecipe : AppCompatActivity() {
             addPhotoButton.background = BitmapDrawable(resources, imageBitmap)
         }
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            addPhotoButton.background = Drawable.createFromPath(data?.dataString)
+            val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(data?.data!!))
+            addPhotoButton.background = BitmapDrawable(resources, bitmap)
         }
         recipeImage = addPhotoButton.background
     }

@@ -22,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPlateformesMobiles">
         <activity
+            android:name=".ui.Play_mode"
+            android:exported="false" />
+        <activity
             android:name=".ui.Recipe"
             android:exported="false" />
         <activity

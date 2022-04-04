@@ -5,6 +5,7 @@
     <string name="Continue">Continuer</string>
 
     <string name="back">return</string>
+    <string name="close">Fermer</string>
 
     <string name="loading">Chargement...</string>
 
@@ -66,5 +67,12 @@
     <string name="Description">Description</string>
     <string name="Ingredients">Ingrédients</string>
     <string name="Steps">Étapes</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <!-- Strings related to Play Mode -->
+    <string name="previousStep">Étape précedente</string>
+    <string name="nextStep">Étape suivante</string>
 
 </resources>

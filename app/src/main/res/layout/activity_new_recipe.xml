@@ -36,19 +36,20 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="130dp"
+        app:layout_constraintBottom_toTopOf="@id/NewRecipeAppBarBottom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/NewRecipeAppBarTop"
-        app:layout_constraintBottom_toTopOf="@id/NewRecipeAppBarBottom">
+        app:layout_constraintVertical_bias="1.0">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -212,7 +213,6 @@
 
     </RelativeLayout>
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/NewRecipeAppBarBottom"
         android:layout_width="match_parent"
@@ -228,10 +228,11 @@
             android:layout_height="match_parent"
             >
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
                 >
 
                 <Button
@@ -260,7 +261,7 @@
                     android:layout_weight="1"
                     android:layout_margin="@dimen/bottom_horizontal_margin"/>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
 

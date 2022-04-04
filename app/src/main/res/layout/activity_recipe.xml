@@ -27,7 +27,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/account_back_button"
+                    android:id="@+id/recipe_back_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/back_button"
@@ -38,7 +38,7 @@
                     android:layout_gravity="center_vertical"
                     />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
@@ -46,28 +46,28 @@
                     <TextView
                         android:id="@+id/RecipeToolBarTitle"
                         android:layout_width="wrap_content"
+                        android:maxWidth="300dp"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:text="@string/loading"
                         android:textAlignment="textStart"
                         android:textColor="@color/black"
                         android:textSize="40sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_weight="1"
+                         />
 
                     <Button
+                        android:id="@+id/play_button"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginEnd="@dimen/activity_horizontal_margin"
                         android:background="@drawable/play_button"
                         android:text="@string/Play"
                         android:textSize="0sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_gravity="center_vertical"
                         />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -85,8 +85,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,50 +93,52 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/RecipeImage"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Description"
-                    android:textSize="@dimen/RecipeActivitySubTitle"
                     android:layout_margin="@dimen/horizontal_padding"
-                    />
+                    android:text="@string/Description"
+                    android:textSize="@dimen/RecipeActivitySubTitle" />
 
                 <TextView
                     android:id="@+id/RecipeDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/RecipeMargin"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/RecipeActivityDescription"
-                    android:layout_margin="@dimen/RecipeMargin"
-                    />
+                    android:textSize="@dimen/RecipeActivityDescription" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Ingredients"
-                    android:textSize="@dimen/RecipeActivitySubTitle"
                     android:layout_margin="@dimen/horizontal_padding"
-                    />
+                    android:text="@string/Ingredients"
+                    android:textSize="@dimen/RecipeActivitySubTitle" />
 
                 <GridLayout
                     android:id="@+id/RecipeIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="fill"
-                    android:columnCount="4"
-                    />
+                    android:columnCount="4" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Steps"
-                    android:textSize="@dimen/RecipeActivitySubTitle"
                     android:layout_margin="@dimen/horizontal_padding"
-                    />
+                    android:text="@string/Steps"
+                    android:textSize="@dimen/RecipeActivitySubTitle" />
+
+                <LinearLayout
+                    android:id="@+id/RecipesSteps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
 
 
             </LinearLayout>
