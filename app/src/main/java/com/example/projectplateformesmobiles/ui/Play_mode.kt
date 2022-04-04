@@ -2,8 +2,6 @@ package com.example.projectplateformesmobiles.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
 import com.example.projectplateformesmobiles.R
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -33,13 +31,24 @@ class Play_mode : AppCompatActivity() {
     }
 
     fun showFragment() {
-        var stepTitle = ""
-        var stepIngredients = hashMapOf<String,String>()
-        var stepDescription = ""
+        var stepTitle: String? = null
+        var stepIngredients: HashMap<String, String>? = null
+        var stepDescription: String? = null
 
         if (step == 0) {
             stepTitle = "Préparation des ingrédients"
             stepIngredients = ingredients
+        } else {
+            val currentStep: Pair<String, HashMap<String, String>> = steps.toList()[step - 1] as Pair<String, HashMap<String, String>>
+            stepTitle = currentStep.first
+
+            val currentStepInfos = currentStep.second
+            val currentStepIngredients = hashMapOf<String,String>()
+            for (i in currentStepInfos["ingredients"]!!.split(" ")){
+                currentStepIngredients.put(i,"")
+            }
+            stepIngredients = currentStepIngredients
+            stepDescription = currentStepInfos["description"]!!
         }
 
         val playModeFragment = PlayFragment()
@@ -48,6 +57,7 @@ class Play_mode : AppCompatActivity() {
         bundle.putSerializable("description", stepDescription)
         bundle.putSerializable("ingredients", stepIngredients)
         bundle.putSerializable("step", step)
+        bundle.putSerializable("stepsNumber", steps.size)
         playModeFragment.arguments = bundle
 
         supportFragmentManager.beginTransaction()
@@ -55,7 +65,15 @@ class Play_mode : AppCompatActivity() {
 
     }
 
-    fun test() {
-        Log.d("debug", "test")
+    fun nextStep(){
+        step++
+        showFragment()
     }
+
+    fun previsousStep(){
+        step--
+        showFragment()
+    }
+
+
 }

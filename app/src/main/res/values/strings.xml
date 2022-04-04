@@ -74,5 +74,6 @@
     <!-- Strings related to Play Mode -->
     <string name="previousStep">Étape précedente</string>
     <string name="nextStep">Étape suivante</string>
+    <string name="Finish">Terminer la recette</string>
 
 </resources>

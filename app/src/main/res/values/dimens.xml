@@ -16,6 +16,7 @@
 
     <!-- Activity Recipe -->
     <dimen name="RecipeActivitySubTitle">30sp</dimen>
+    <dimen name="RecipeActivitySubTitleProg">11sp</dimen>
     <dimen name="RecipeActivityStepSubTitle">10sp</dimen>
     <dimen name="RecipeActivityDescription">20sp</dimen>
     <dimen name="RecipeActivityIngredients">7sp</dimen>

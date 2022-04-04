@@ -356,7 +356,7 @@ class NewRecipe : AppCompatActivity() {
 
                           var saveIngredient = ""
                           for(b in buttons){
-                              saveIngredient += b.text.toString() + ", "
+                              saveIngredient += b.text.toString() + " "
                           }
                           steps.set(addStepTitleEditText.text.toString(),
                               mutableMapOf("ingredients" to saveIngredient,
