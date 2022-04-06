@@ -56,19 +56,20 @@ class Recipe : AppCompatActivity() {
                 )
             }
 
-        val title = intent.extras?.get("Title")
         val m_title: TextView = findViewById(R.id.RecipeToolBarTitle)
-        m_title.text = title.toString()
 
-        val description = intent.extras?.get("Description")
         val m_description: TextView = findViewById(R.id.RecipeDescription)
-        m_description.text = description.toString()
-
 
         val m_ingredients: GridLayout = findViewById(R.id.RecipeIngredients)
         val db = Firebase.firestore
         val recipeRef = db.collection("recipes").document(intent.extras?.get("ID").toString())
         recipeRef.get().addOnSuccessListener { recipeDocument ->
+            val title: String = recipeDocument.get("title") as String
+            m_title.text = title
+
+            val description = recipeDocument.get("description") as String
+            m_description.text = description
+
             val recipeIngredients: HashMap<String, String> =
                 recipeDocument.get("ingredients") as HashMap<String, String>
 
@@ -240,6 +241,18 @@ class Recipe : AppCompatActivity() {
                 }
             }
 
+        }
+
+        val shareButton: Button = findViewById(R.id.share)
+        shareButton.setOnClickListener{
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, intent.extras?.get("ID").toString())
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(sendIntent)
         }
 
     }

@@ -223,8 +223,6 @@ class HomeFragment : Fragment() {
                                         newCardView.setOnClickListener{
                                             val recipeIntent = Intent(this.requireContext(), Recipe::class.java)
 
-                                            recipeIntent.putExtra("Title", newTitle.text.toString())
-                                            recipeIntent.putExtra("Description", newDescr.text.toString())
                                             recipeIntent.putExtra("ID", r)
 
                                             startActivity(recipeIntent)
