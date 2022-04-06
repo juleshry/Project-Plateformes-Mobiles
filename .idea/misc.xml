@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../.gradle/caches/transforms-3/68f16b4348e1c1fa1d5cf58316a8cd5d/transformed/jetified-facebook-share-4.42.0/res/drawable/com_facebook_button_send_background.xml" value="0.1" />
         <entry key="..\:/Users/jubil/AndroidStudioProjects/ProjectPlateformesMobiles/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/jubil/AndroidStudioProjects/ProjectPlateformesMobiles/app/src/main/res/drawable/background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/jubil/AndroidStudioProjects/ProjectPlateformesMobiles/app/src/main/res/drawable/button.xml" value="0.25052083333333336" />
@@ -59,6 +60,8 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15358649789029535" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15555555555555556" />
         <entry key="app/src/main/res/layout/activity_account_creation.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_facebook.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2953125" />
       </map>
     </option>
   </component>

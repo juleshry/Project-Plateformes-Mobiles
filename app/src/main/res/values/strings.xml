@@ -76,4 +76,12 @@
     <string name="nextStep">Étape suivante</string>
     <string name="Finish">Terminer la recette</string>
 
+
+    <string name="facebook_app_id">640209680403991</string>
+    <string name="fb_login_protocol_scheme">fb640209680403991</string>
+    <string name="facebook_client_token">b075c5460ca294942f3e7a757e430633</string>
+
+
+
+
 </resources>

@@ -30,6 +30,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.facebook.login.LoginManager
+import com.facebook.login.widget.LoginButton
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -61,6 +63,13 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
+        val fbLoginButton: LoginButton = findViewById(R.id.fb_login_button)
+        fbLoginButton.setReadPermissions("email", "public_profile")
+        fbLoginButton.setOnClickListener {
+            val fbIntent = Intent(this, FacebookActivity::class.java)
+            fbIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(fbIntent)
+        }
 
         val login: Button = findViewById(R.id.login)
         val username: EditText = findViewById(R.id.username)
