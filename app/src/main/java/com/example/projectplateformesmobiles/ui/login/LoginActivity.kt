@@ -2,6 +2,8 @@ package com.example.projectplateformesmobiles.ui.login
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -16,6 +18,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.example.projectplateformesmobiles.Menu
 import com.example.projectplateformesmobiles.ui.accountCreation.AccountCreation
 
@@ -38,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
         private const val TAG = "LoginActivity"
         private const val RC_SIGN_IN = 667
     }
+
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var auth: FirebaseAuth
 
@@ -63,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         val login: Button = findViewById(R.id.login)
-        val username: EditText = findViewById(R.id.username)
+        val email: EditText = findViewById(R.id.email)
         val password: EditText = findViewById(R.id.password)
         val loading: ProgressBar = findViewById(R.id.loading)
         val create: Button = findViewById(R.id.createAccount)
@@ -77,11 +81,11 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
 
-            // disable login button unless both username / password is valid
+            // disable login button unless both email / password is valid
             login.isEnabled = loginState.isDataValid
 
             if (loginState.usernameError != null) {
-                username.error = getString(loginState.usernameError)
+                email.error = getString(loginState.usernameError)
             }
             if (loginState.passwordError != null) {
                 password.error = getString(loginState.passwordError)
@@ -104,17 +108,28 @@ class LoginActivity : AppCompatActivity() {
             finish()
         })
 
-        username.afterTextChanged {
-            loginViewModel.loginDataChanged(
-                username.text.toString(),
-                password.text.toString()
-            )
+        email.addTextChangedListener{
+            val mail = email.text.toString()
+            if(!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()){
+                email.setTextColor(Color.RED)
+            } else {
+                email.setTextColor(Color.WHITE)
+            }
+        }
+
+        password.addTextChangedListener{
+            //TODO : Mettre en place le bon format du mot de passe
+            val p = password.text.toString()
+            val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{7,}\$"
+            val passwordMatcher = Regex(passwordPattern)
+
+            val isValidPassword: Boolean = passwordMatcher.find(p) != null
         }
 
         password.apply {
             afterTextChanged {
                 loginViewModel.loginDataChanged(
-                    username.text.toString(),
+                    email.text.toString(),
                     password.text.toString()
                 )
             }
@@ -123,7 +138,7 @@ class LoginActivity : AppCompatActivity() {
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
                         loginViewModel.login(
-                            username.text.toString(),
+                            email.text.toString(),
                             password.text.toString()
                         )
                 }
@@ -131,12 +146,23 @@ class LoginActivity : AppCompatActivity() {
             }
 
             login.setOnClickListener {
-                //loading.visibility = View.VISIBLE
-                //loginViewModel.login(username.text.toString(), password.text.toString())
-                startActivity(menuIntent)
+                auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+                    .addOnCompleteListener { task ->
+                        if(task.isSuccessful){
+                            Log.d("SignIn", "SigninWithEmail:success")
+                            val user =  auth.currentUser
+                            updateUI(user)
+                        } else {
+                            Log.w("SignIn", "SigninWithEmail:failure", task.exception)
+                            email.setTextColor(Color.RED)
+                            password.setTextColor(Color.RED)
+                            Toast.makeText(baseContext, "Authentication failed", Toast.LENGTH_SHORT).show()
+                            updateUI(null)
+                        }
+                    }
             }
         }
-        create.setOnClickListener{
+        create.setOnClickListener {
             startActivity(accountCreationIntent)
         }
     }
@@ -150,11 +176,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         //Navigate to Main activity
-        if (user == null){
+        if (user == null) {
             Log.w(TAG, "usr is null, not going to navigate")
             return
         }
-        startActivity(Intent(this,  Menu::class.java))
+        startActivity(Intent(this, Menu::class.java))
 
         finish()
     }
@@ -224,3 +250,4 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
 }
+

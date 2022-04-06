@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="100dp"
-            android:layout_marginBottom="110dp"
+            android:layout_marginBottom="90dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/HomeAppBar"
             tools:ignore="SpeakableTextPresentCheck">
@@ -70,6 +70,8 @@
                 android:id="@+id/homeRecipesGridLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="25dp"
+                android:paddingTop="5dp"
                 android:layout_gravity="fill"
                 android:columnCount="2"
                 >
