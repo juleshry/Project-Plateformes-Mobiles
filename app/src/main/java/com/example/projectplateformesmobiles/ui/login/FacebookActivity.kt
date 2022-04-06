@@ -74,7 +74,6 @@ class FacebookActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         if (user == null){
             Log.w(TAG, "usr is null, not going to navigate")
-            startActivity(Intent(this,  LoginActivity::class.java))
             finish()
             return
 
