@@ -68,10 +68,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val fbLoginButton: LoginButton = findViewById(R.id.fb_login_button)
-        fbLoginButton.setReadPermissions("email", "public_profile")
+        fbLoginButton.setPermissions("email", "public_profile")
         fbLoginButton.setOnClickListener {
             val fbIntent = Intent(this, FacebookActivity::class.java)
-            fbIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            fbIntent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
             startActivity(fbIntent)
         }
 
