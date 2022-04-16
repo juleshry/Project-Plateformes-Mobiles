@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.*
@@ -20,9 +21,21 @@ class Recipe : AppCompatActivity() {
 
     private val ONE_MEGABYTE: Long = 1024 * 1024
 
+    private var ID: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe)
+
+        val appLinkIntent = intent
+        val appLinkAction = appLinkIntent.action
+        val appLinkData = appLinkIntent.data
+
+        ID = appLinkData?.getQueryParameter("ID")
+
+        if(intent.extras?.get("ID") != null){
+            ID = intent.extras?.get("ID").toString()
+        }
 
         val backButton: Button = findViewById(R.id.recipe_back_button)
         backButton.setOnClickListener {
@@ -32,14 +45,14 @@ class Recipe : AppCompatActivity() {
         val playButton: Button = findViewById(R.id.play_button)
         playButton.setOnClickListener {
             val playIntent = Intent(this, Play_mode::class.java)
-            playIntent.putExtra("ID", intent.extras?.get("ID").toString())
+            playIntent.putExtra("ID", ID)
             startActivity(playIntent)
         }
 
 
         val imageView: ImageView = findViewById(R.id.RecipeImage)
         val imageRef =
-            FirebaseStorage.getInstance().reference.child(intent.extras?.get("ID").toString())
+            FirebaseStorage.getInstance().reference.child(ID!!)
         imageRef.getBytes(ONE_MEGABYTE)
             .addOnSuccessListener { image ->
                 imageView.setImageBitmap(
@@ -62,7 +75,7 @@ class Recipe : AppCompatActivity() {
 
         val m_ingredients: GridLayout = findViewById(R.id.RecipeIngredients)
         val db = Firebase.firestore
-        val recipeRef = db.collection("recipes").document(intent.extras?.get("ID").toString())
+        val recipeRef = db.collection("recipes").document(ID!!)
         recipeRef.get().addOnSuccessListener { recipeDocument ->
             val title: String = recipeDocument.get("title") as String
             m_title.text = title
@@ -240,20 +253,19 @@ class Recipe : AppCompatActivity() {
                     }
                 }
             }
+            val shareButton: Button = findViewById(R.id.share)
+            val shareUrl = "http://myRecipe.com/recipe?ID=$ID"
+            val shareText = "$title sur l'application myRecipe: \n$shareUrl"
+            shareButton.setOnClickListener{
+                val sendIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, shareText)
+                    type = "text/plain"
+                }
 
-        }
-
-        val shareButton: Button = findViewById(R.id.share)
-        shareButton.setOnClickListener{
-            val sendIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, intent.extras?.get("ID").toString())
-                type = "text/plain"
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
             }
-
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(sendIntent)
         }
-
     }
 }
