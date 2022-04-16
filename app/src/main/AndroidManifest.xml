@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.example.projectplateformesmobiles" >
+=======
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.projectplateformesmobiles">
+>>>>>>> jules.dev
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -33,7 +38,20 @@
             android:exported="false" />
         <activity
             android:name=".ui.Recipe"
-            android:exported="false" />
+            android:exported="true"
+            tools:ignore="AppLinkUrlError">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="myRecipe.com"
+                    android:pathPrefix="/recipe" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.Account"
             android:exported="false" />
