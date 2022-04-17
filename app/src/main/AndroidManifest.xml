@@ -23,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPlateformesMobiles">
         <activity
+            android:name=".ui.EditRecipe"
+            android:exported="false" />
+        <activity
             android:name=".ui.Play_mode"
             android:exported="false" />
         <activity
@@ -36,9 +39,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="http"
                     android:host="myRecipe.com"
-                    android:pathPrefix="/recipe" />
+                    android:pathPrefix="/recipe"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity

@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.setMargins
+import androidx.core.view.setPadding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
@@ -55,8 +56,7 @@ class NewRecipe : AppCompatActivity() {
         storageReference = FirebaseStorage.getInstance().reference
 
 
-        val inflater: LayoutInflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
-
+        val inflater: LayoutInflater = this.layoutInflater
         val view: View = inflater.inflate(R.layout.activity_new_recipe, null)
 
         addPhotoButton = findViewById(R.id.addPhotoButton)
@@ -223,6 +223,91 @@ class NewRecipe : AppCompatActivity() {
 
     }
 
+    private fun showIngredient(ingredient: String, value: String, inflater: LayoutInflater, view: View){
+        val newButton = Button(this)
+        val buttonParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        buttonParams.setMargins(
+            resources.getDimension(R.dimen.activity_horizontal_margin).toInt() + 50,
+            resources.getDimension(R.dimen.activity_vertical_margin).toInt(),
+            0,
+            resources.getDimension(R.dimen.activity_vertical_margin).toInt()
+        )
+
+        if(value == ""){
+            newButton.text = ingredient
+        } else newButton.text = ingredient + " x" + value
+        newButton.background = resources.getDrawable(R.drawable.light_button)
+        newButton.setTextColor(resources.getColor(R.color.dark_green))
+        newButton.setPadding(20)
+        newButton.layoutParams = buttonParams
+        newButton.setOnClickListener {
+            EditIngredient(inflater, view, addIngredientLinearLayout, newButton, ingredient, value)
+        }
+        addIngredientLinearLayout.addView(newButton)
+    }
+
+    private fun EditIngredient(inflater: LayoutInflater, view: View, container: LinearLayout, parent: Button, ingredient: String, value: String) {
+        val popupView: View = inflater.inflate(R.layout.add_ingredient_popup, null)
+
+        val width: Int = LinearLayout.LayoutParams.MATCH_PARENT
+        val height: Int = LinearLayout.LayoutParams.MATCH_PARENT
+        val focusable = true
+        val popupWindow = PopupWindow(popupView, width, height, focusable)
+
+        this.window.statusBarColor = ContextCompat.getColor(this, R.color.semiTransparent)
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
+
+
+        fun closePopupListener() {
+            this.window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+            popupWindow.dismiss()
+        }
+
+        val closeButton: Button = popupView.findViewById(R.id.backPopup)
+        closeButton.setOnClickListener { closePopupListener() }
+
+        var quantity = ""
+        var unity = ""
+        for (c in value){
+            if(c.toString().matches("\\d+(\\.\\d+)?".toRegex()) || c.toString() == "."){
+                quantity += c
+            } else unity += c
+        }
+
+        val addIngredientEditText: EditText = popupView.findViewById(R.id.addEditText)
+        addIngredientEditText.setText(ingredient)
+        val addQuantityEditText: EditText = popupView.findViewById(R.id.addQuantityEditText)
+        addQuantityEditText.setText(quantity)
+        val addUnityEditText: EditText = popupView.findViewById(R.id.addUnityEditText)
+        addUnityEditText.setText(unity)
+
+        val confirmNewIngredientButton: Button = popupView.findViewById(R.id.confirmNewRecipePopup)
+        confirmNewIngredientButton.setOnClickListener {
+
+            if (addQuantityEditText.text.toString() != "")
+                parent.text =
+                    addIngredientEditText.text.toString() +
+                            " x" + addQuantityEditText.text.toString() +
+                            addUnityEditText.text.toString()
+            else parent.text = addIngredientEditText.text
+
+            closePopupListener()
+        }
+
+        val deleteIngredientButton: Button = popupView.findViewById(R.id.deleteNewIngredientPopup)
+        deleteIngredientButton.setOnClickListener{
+            ingredients.remove(ingredient)
+            container.removeView(parent)
+            closePopupListener()
+        }
+
+    }
+
     private fun addIngredient(inflater: LayoutInflater, view: View) {
         val popupView: View = inflater.inflate(R.layout.add_ingredient_popup, null)
 
@@ -251,29 +336,17 @@ class NewRecipe : AppCompatActivity() {
         val confirmNewIngredientButton: Button = popupView.findViewById(R.id.confirmNewRecipePopup)
         confirmNewIngredientButton.setOnClickListener {
             if (addIngredientEditText.text.toString() != "") {
-                val params = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-                val newTextView = TextView(this.applicationContext)
-                if (addQuantityEditText.text.toString() != "")
-                    newTextView.text =
-                        addIngredientEditText.text.toString() + " x" + addQuantityEditText.text.toString() + addUnityEditText.text.toString()
-                else
-                    newTextView.text = addIngredientEditText.text.toString()
-                newTextView.setTextColor(Color.BLACK)
-                newTextView.textSize = 17f
-                newTextView.paintFlags = 0
+                showIngredient(addIngredientEditText.text.toString(), addQuantityEditText.text.toString() + addUnityEditText.text.toString(), inflater, view)
 
-                params.marginStart =
-                    resources.getDimension(R.dimen.activity_horizontal_margin).toInt() + 50
-
-                newTextView.layoutParams = params
-                addIngredientLinearLayout.addView(newTextView)
                 ingredients[addIngredientEditText.text.toString()] = addQuantityEditText.text.toString() + addUnityEditText.text.toString()
             }
             closePopupListener()
         }
+
+        val deleteIngredientButton: Button = popupView.findViewById(R.id.deleteNewIngredientPopup)
+        deleteIngredientButton.background = resources.getDrawable(R.drawable.disabled_button)
+        deleteIngredientButton.setTextColor(Color.WHITE)
+        deleteIngredientButton.isEnabled = false
 
     }
 

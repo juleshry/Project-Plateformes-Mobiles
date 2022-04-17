@@ -6,12 +6,12 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.view.setMargins
+import androidx.core.view.setPadding
 import com.example.projectplateformesmobiles.R
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -155,24 +155,39 @@ class Recipe : AppCompatActivity() {
 
             val m_recipeSteps: LinearLayout = findViewById(R.id.RecipesSteps)
 
-            val stepParam = LinearLayout.LayoutParams(
+            val stepParam = FrameLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
             stepParam.setMargins(
-                resources.getDimension(R.dimen.RecipeMargin).toInt(), 0, 0, 0
+                resources.getDimension(R.dimen.RecipeActivityStepSubTitle).toInt(), 0, 0, 0
             )
 
+            var i = 1
             for ((step, infos) in recipeSteps) {
+                val cardViewLayoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                cardViewLayoutParams.setMargins(
+                    resources.getDimension(R.dimen.RecipeMargin).toInt()
+                )
+
+                val stepCardView = CardView(this)
+                stepCardView.radius = 30f
+                stepCardView.layoutParams = cardViewLayoutParams
+                stepCardView.setPadding(20)
+
                 val entireStep = LinearLayout(this)
+                stepCardView.addView(entireStep)
                 entireStep.orientation = LinearLayout.VERTICAL
                 entireStep.layoutParams = stepParam
-                m_recipeSteps.addView(entireStep)
+                m_recipeSteps.addView(stepCardView)
 
                 val stepTitle = TextView(this)
-                stepTitle.text = step
+                stepTitle.text = i.toString() + ". " + step
                 stepTitle.textSize = resources.getDimension(R.dimen.RecipeActivityStepSubTitle)
-                stepTitle.setTextColor(Color.BLACK)
+                stepTitle.setTextColor(resources.getColor(R.color.dark_green))
                 stepTitle.layoutParams = stepParam
 
                 entireStep.addView(stepTitle)
@@ -183,7 +198,7 @@ class Recipe : AppCompatActivity() {
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
                 stepInfosLayoutParams.setMargins(
-                    resources.getDimension(R.dimen.RecipeMargin).toInt(),
+                    resources.getDimension(R.dimen.RecipeActivityStepSubTitle).toInt(),
                     resources.getDimension(R.dimen.RecipeSmallMargin).toInt(),
                     0,
                     resources.getDimension(R.dimen.RecipeSmallMargin).toInt()
@@ -203,7 +218,7 @@ class Recipe : AppCompatActivity() {
                         gridLayourParam.gravity = Gravity.FILL
 
                         val stepIngredientGridLayout = GridLayout(this)
-                        stepIngredientGridLayout.columnCount = 4
+                        stepIngredientGridLayout.columnCount = 2
                         stepIngredientGridLayout.layoutParams = gridLayourParam
                         stepinfos.addView(stepIngredientGridLayout)
 
@@ -252,8 +267,9 @@ class Recipe : AppCompatActivity() {
                         stepinfos.addView(stepDescription)
                     }
                 }
+                i++
             }
-            val shareButton: Button = findViewById(R.id.share)
+            val shareButton: Button = findViewById(R.id.shareButton)
             val shareUrl = "http://myRecipe.com/recipe?ID=$ID"
             val shareText = "$title sur l'application myRecipe: \n$shareUrl"
             shareButton.setOnClickListener{
@@ -265,6 +281,13 @@ class Recipe : AppCompatActivity() {
 
                 val shareIntent = Intent.createChooser(sendIntent, null)
                 startActivity(shareIntent)
+            }
+
+            val editButton: Button = findViewById(R.id.editButton)
+            editButton.setOnClickListener{
+                val editIntent = Intent(this, EditRecipe::class.java)
+                editIntent.putExtra("ID", ID)
+                startActivity(editIntent)
             }
         }
     }

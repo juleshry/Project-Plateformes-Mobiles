@@ -58,9 +58,10 @@
     <string name="takePicture">Prendre une photo</string>
     <string name="choosePicture">Choisir une photo de la galerie</string>
 
-    <!-- Strings related to photoPopup -->
+    <!-- Strings related to IngredientPopup -->
     <string name="Quantity">Quantité</string>
     <string name="Unity">Unité</string>
+    <string name="delete">Supprimer</string>
 
     <!-- Strings related to Recipe -->
     <string name="Play">play</string>
@@ -76,5 +77,8 @@
     <string name="previousStep">Étape précedente</string>
     <string name="nextStep">Étape suivante</string>
     <string name="Finish">Terminer la recette</string>
+
+    <!-- Strings related to Edit Recipe -->
+    <string name="edit_Recipe">Modification de la recette</string>
 
 </resources>
