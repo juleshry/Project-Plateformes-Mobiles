@@ -23,8 +23,8 @@ class Recipe : AppCompatActivity() {
 
     private var ID: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         setContentView(R.layout.activity_recipe)
 
         val appLinkIntent = intent

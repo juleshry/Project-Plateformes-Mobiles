@@ -44,7 +44,7 @@ class NewRecipe : AppCompatActivity() {
     private lateinit var addStepButton: Button
     private lateinit var addTitle: EditText
     private lateinit var addDescription: EditText
-    private lateinit var recipeImage: Drawable
+    private var recipeImage: Drawable? = null
 
     private var ingredients = mutableMapOf<String, String>()
     private var steps = mutableMapOf<String, MutableMap<String, String>>()
@@ -98,10 +98,11 @@ class NewRecipe : AppCompatActivity() {
                     .add(recipe)
                     .addOnSuccessListener { documentReference ->
                         Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                        val bitmap = recipeImage.toBitmap()
+                        val bitmap = recipeImage!!.toBitmap()
                         val baos = ByteArrayOutputStream()
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                         val data = baos.toByteArray()
+
                         val imageRef = storageReference?.child(documentReference.id)
                         val uploadTask = imageRef?.putBytes(data)
                         if (uploadTask != null) {
@@ -135,8 +136,7 @@ class NewRecipe : AppCompatActivity() {
     }
 
 
-
-        private fun photoButtonOnClick(inflater: LayoutInflater, view: View) {
+    private fun photoButtonOnClick(inflater: LayoutInflater, view: View) {
         val popupView: View = inflater.inflate(R.layout.photo_popup, null)
 
         val width: Int = LinearLayout.LayoutParams.MATCH_PARENT
@@ -223,7 +223,12 @@ class NewRecipe : AppCompatActivity() {
 
     }
 
-    private fun showIngredient(ingredient: String, value: String, inflater: LayoutInflater, view: View){
+    private fun showIngredient(
+        ingredient: String,
+        value: String,
+        inflater: LayoutInflater,
+        view: View
+    ) {
         val newButton = Button(this)
         val buttonParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -237,7 +242,7 @@ class NewRecipe : AppCompatActivity() {
             resources.getDimension(R.dimen.activity_vertical_margin).toInt()
         )
 
-        if(value == ""){
+        if (value == "") {
             newButton.text = ingredient
         } else newButton.text = ingredient + " x" + value
         newButton.background = resources.getDrawable(R.drawable.light_button)
@@ -250,7 +255,14 @@ class NewRecipe : AppCompatActivity() {
         addIngredientLinearLayout.addView(newButton)
     }
 
-    private fun EditIngredient(inflater: LayoutInflater, view: View, container: LinearLayout, parent: Button, ingredient: String, value: String) {
+    private fun EditIngredient(
+        inflater: LayoutInflater,
+        view: View,
+        container: LinearLayout,
+        parent: Button,
+        ingredient: String,
+        value: String
+    ) {
         val popupView: View = inflater.inflate(R.layout.add_ingredient_popup, null)
 
         val width: Int = LinearLayout.LayoutParams.MATCH_PARENT
@@ -273,8 +285,8 @@ class NewRecipe : AppCompatActivity() {
 
         var quantity = ""
         var unity = ""
-        for (c in value){
-            if(c.toString().matches("\\d+(\\.\\d+)?".toRegex()) || c.toString() == "."){
+        for (c in value) {
+            if (c.toString().matches("\\d+(\\.\\d+)?".toRegex()) || c.toString() == ".") {
                 quantity += c
             } else unity += c
         }
@@ -300,7 +312,7 @@ class NewRecipe : AppCompatActivity() {
         }
 
         val deleteIngredientButton: Button = popupView.findViewById(R.id.deleteNewIngredientPopup)
-        deleteIngredientButton.setOnClickListener{
+        deleteIngredientButton.setOnClickListener {
             ingredients.remove(ingredient)
             container.removeView(parent)
             closePopupListener()
@@ -336,9 +348,15 @@ class NewRecipe : AppCompatActivity() {
         val confirmNewIngredientButton: Button = popupView.findViewById(R.id.confirmNewRecipePopup)
         confirmNewIngredientButton.setOnClickListener {
             if (addIngredientEditText.text.toString() != "") {
-                showIngredient(addIngredientEditText.text.toString(), addQuantityEditText.text.toString() + addUnityEditText.text.toString(), inflater, view)
+                showIngredient(
+                    addIngredientEditText.text.toString(),
+                    addQuantityEditText.text.toString() + addUnityEditText.text.toString(),
+                    inflater,
+                    view
+                )
 
-                ingredients[addIngredientEditText.text.toString()] = addQuantityEditText.text.toString() + addUnityEditText.text.toString()
+                ingredients[addIngredientEditText.text.toString()] =
+                    addQuantityEditText.text.toString() + addUnityEditText.text.toString()
             }
             closePopupListener()
         }
@@ -372,7 +390,8 @@ class NewRecipe : AppCompatActivity() {
         closeButton.setOnClickListener { closePopupListener() }
 
         val addStepTitleEditText: EditText = popupView.findViewById(R.id.addStepTitleEditText)
-        val addStepDescriptionEditText: EditText = popupView.findViewById(R.id.addStepDescriptionEditText)
+        val addStepDescriptionEditText: EditText =
+            popupView.findViewById(R.id.addStepDescriptionEditText)
 
         val stepGrid: GridLayout = popupView.findViewById(R.id.addStepGrid)
         val buttons = mutableSetOf<Button>()
@@ -392,7 +411,7 @@ class NewRecipe : AppCompatActivity() {
             newButton.layoutParams = params
 
             newButton.setOnCheckedChangeListener { _, isChecked ->
-                if(isChecked) {
+                if (isChecked) {
                     newButton.background = resources.getDrawable(R.drawable.plain_button)
                     newButton.setTextColor(resources.getColor(R.color.white))
                     buttons.add(newButton)
@@ -408,38 +427,47 @@ class NewRecipe : AppCompatActivity() {
         val confirmNewStepButton: Button = popupView.findViewById(R.id.confirmNewStepPopup)
         confirmNewStepButton.setOnClickListener {
 
-                      if(addStepTitleEditText.text.toString() != ""
-                          && addStepDescriptionEditText.text.toString() != ""){
+            if (addStepTitleEditText.text.toString() != ""
+                && addStepDescriptionEditText.text.toString() != ""
+            ) {
 
-                          val params = LinearLayout.LayoutParams(
-                              LinearLayout.LayoutParams.MATCH_PARENT,
-                              LinearLayout.LayoutParams.WRAP_CONTENT
-                          )
-                          val newTextView = TextView(this.applicationContext)
-                          newTextView.text = addStepTitleEditText.text.toString()
-                          newTextView.setTextColor(Color.BLACK)
-                          newTextView.textSize = 17f
-                          newTextView.paintFlags = 0
+                val params = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                val newTextView = TextView(this.applicationContext)
+                newTextView.text = addStepTitleEditText.text.toString()
+                newTextView.setTextColor(Color.BLACK)
+                newTextView.textSize = 17f
+                newTextView.paintFlags = 0
 
-                          params.marginStart =
-                              resources.getDimension(R.dimen.activity_horizontal_margin).toInt() + 50
+                params.marginStart =
+                    resources.getDimension(R.dimen.activity_horizontal_margin).toInt() + 50
 
-                          newTextView.layoutParams = params
-                          addStepLinearLayout.addView(newTextView)
+                newTextView.layoutParams = params
+                addStepLinearLayout.addView(newTextView)
 
-                          var saveIngredient = ""
-                          for(b in buttons){
-                              saveIngredient += b.text.toString() + " "
-                          }
-                          steps.set(addStepTitleEditText.text.toString(),
-                              mutableMapOf("ingredients" to saveIngredient,
-                                  "description" to addStepDescriptionEditText.text.toString()))
+                var saveIngredient = ""
+                for (b in buttons) {
+                    saveIngredient += b.text.toString() + ", "
+                }
+                steps.set(
+                    addStepTitleEditText.text.toString(),
+                    mutableMapOf(
+                        "ingredients" to saveIngredient,
+                        "description" to addStepDescriptionEditText.text.toString()
+                    )
+                )
 
-                          closePopupListener()
-                      } else {
-                          Toast.makeText(this.applicationContext, "Il manque des informations", Toast.LENGTH_SHORT)
-                              .show()
-                      }
+                closePopupListener()
+            } else {
+                Toast.makeText(
+                    this.applicationContext,
+                    "Il manque des informations",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
         }
 
     }

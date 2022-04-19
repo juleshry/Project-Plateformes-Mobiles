@@ -2,6 +2,7 @@ package com.example.projectplateformesmobiles.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.projectplateformesmobiles.R
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -44,8 +45,8 @@ class Play_mode : AppCompatActivity() {
 
             val currentStepInfos = currentStep.second
             val currentStepIngredients = hashMapOf<String,String>()
-            for (i in currentStepInfos["ingredients"]!!.split(" ")){
-                currentStepIngredients.put(i,"")
+            for (i in currentStepInfos["ingredients"]!!.split(", ")){
+                currentStepIngredients[i] = ""
             }
             stepIngredients = currentStepIngredients
             stepDescription = currentStepInfos["description"]!!

@@ -217,13 +217,15 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <GridLayout
                         android:id="@+id/EditRecipeSteps"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_gravity="center_horizontal"
+                        android:columnCount="2"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/addSteps" />
+                        app:layout_constraintTop_toBottomOf="@id/addStep"/>
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

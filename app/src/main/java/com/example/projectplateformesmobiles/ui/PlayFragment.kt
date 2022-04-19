@@ -2,6 +2,7 @@ package com.example.projectplateformesmobiles.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -83,66 +84,69 @@ class PlayFragment : Fragment() {
         val stepInfosLayout: LinearLayout = view.findViewById(R.id.stepInfos)
 
         val ingredientsGridLayout: GridLayout = view.findViewById(R.id.play_mode_ingredients)
+
         for ((k, v) in ingredients!!) {
-            val cardViewLayoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            cardViewLayoutParams.setMargins(
-                resources.getDimension(R.dimen.RecipeMargin).toInt()
-            )
-
-            val ingredientsCardview = CardView(this.requireContext())
-            ingredientsCardview.layoutParams = cardViewLayoutParams
-            ingredientsCardview.radius = 30f
-
-
-            val linearLayoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-
-            val newLinearLayout = LinearLayout(this.requireContext())
-            newLinearLayout.layoutParams = linearLayoutParams
-            newLinearLayout.orientation = LinearLayout.HORIZONTAL
-
-
-            val textViewLayoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            textViewLayoutParams.setMargins(
-                resources.getDimension(R.dimen.RecipeMargin).toInt()
-            )
-
-            val newTextView = TextView(this.requireContext())
-            newTextView.text = k
-            newTextView.setTextColor(Color.BLACK)
-            newTextView.textSize = resources.getDimension(R.dimen.RecipeActivityIngredients)
-            newTextView.layoutParams = textViewLayoutParams
-
-            newLinearLayout.addView(newTextView)
-            ingredientsCardview.addView(newLinearLayout)
-            ingredientsGridLayout.addView(ingredientsCardview)
-
-            if (v != "") {
-                val quantityLayoutParams = LinearLayout.LayoutParams(
+            if (k != "" &&  k != " ") {
+                val cardViewLayoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
-                quantityLayoutParams.setMargins(
-                    0,
-                    resources.getDimension(R.dimen.RecipeMargin).toInt(),
-                    resources.getDimension(R.dimen.RecipeMargin).toInt(),
+                cardViewLayoutParams.setMargins(
                     resources.getDimension(R.dimen.RecipeMargin).toInt()
                 )
 
-                val newTextViewQuantity = TextView(this.requireContext())
-                newTextViewQuantity.text = "x" + v
-                newTextViewQuantity.textSize =
-                    resources.getDimension(R.dimen.RecipeActivityIngredients)
-                newTextViewQuantity.layoutParams = quantityLayoutParams
-                newLinearLayout.addView(newTextViewQuantity)
+                val ingredientsCardview = CardView(this.requireContext())
+                ingredientsCardview.layoutParams = cardViewLayoutParams
+                ingredientsCardview.radius = 30f
+
+
+                val linearLayoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+
+                val newLinearLayout = LinearLayout(this.requireContext())
+                newLinearLayout.layoutParams = linearLayoutParams
+                newLinearLayout.orientation = LinearLayout.HORIZONTAL
+
+
+                val textViewLayoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                textViewLayoutParams.setMargins(
+                    resources.getDimension(R.dimen.RecipeMargin).toInt()
+                )
+
+                val newTextView = TextView(this.requireContext())
+                newTextView.text = k
+                newTextView.setTextColor(Color.BLACK)
+                newTextView.textSize = resources.getDimension(R.dimen.RecipeActivityIngredients)
+                newTextView.layoutParams = textViewLayoutParams
+
+                newLinearLayout.addView(newTextView)
+                ingredientsCardview.addView(newLinearLayout)
+                ingredientsGridLayout.addView(ingredientsCardview)
+
+                if (v != "") {
+                    val quantityLayoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    quantityLayoutParams.setMargins(
+                        0,
+                        resources.getDimension(R.dimen.RecipeMargin).toInt(),
+                        resources.getDimension(R.dimen.RecipeMargin).toInt(),
+                        resources.getDimension(R.dimen.RecipeMargin).toInt()
+                    )
+
+                    val newTextViewQuantity = TextView(this.requireContext())
+                    newTextViewQuantity.text = "x" + v
+                    newTextViewQuantity.textSize =
+                        resources.getDimension(R.dimen.RecipeActivityIngredients)
+                    newTextViewQuantity.layoutParams = quantityLayoutParams
+                    newLinearLayout.addView(newTextViewQuantity)
+                }
             }
         }
 
@@ -162,7 +166,8 @@ class PlayFragment : Fragment() {
             val descriptionSubTitle = TextView(this.requireContext())
             descriptionSubTitle.text = "Description"
             descriptionSubTitle.setTextColor(Color.WHITE)
-            descriptionSubTitle.textSize = resources.getDimension(R.dimen.RecipeActivitySubTitleProg)
+            descriptionSubTitle.textSize =
+                resources.getDimension(R.dimen.RecipeActivitySubTitleProg)
 
             val descriptionTextView = TextView(this.requireContext())
             descriptionTextView.text = description
