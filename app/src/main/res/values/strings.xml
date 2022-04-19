@@ -58,9 +58,10 @@
     <string name="takePicture">Prendre une photo</string>
     <string name="choosePicture">Choisir une photo de la galerie</string>
 
-    <!-- Strings related to photoPopup -->
+    <!-- Strings related to IngredientPopup -->
     <string name="Quantity">Quantité</string>
     <string name="Unity">Unité</string>
+    <string name="delete">Supprimer</string>
 
     <!-- Strings related to Recipe -->
     <string name="Play">play</string>
@@ -78,11 +79,13 @@
     <string name="Finish">Terminer la recette</string>
 
 
+<!-- Strings related to Edit Recipe -->
+    <string name="edit_Recipe">Modification de la recette</string>
+
+
+
     <string name="facebook_app_id">640209680403991</string>
     <string name="fb_login_protocol_scheme">fb640209680403991</string>
     <string name="facebook_client_token">b075c5460ca294942f3e7a757e430633</string>
-
-
-
 
 </resources>

@@ -24,6 +24,7 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/close_button.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/continue_button_popup.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/disabled_button.xml" value="0.21561181434599155" />
+        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/edit_button.xml" value="0.19145299145299147" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/full_background.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/home_logo.xml" value="0.11752136752136752" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/middle_play_mode.xml" value="0.21561181434599155" />
@@ -38,6 +39,7 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout-w936dp/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_account.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_account_creation.xml" value="0.264" />
+        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_edit_recipe.xml" value="0.1782051282051282" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_menu.xml" value="0.4" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_new_recipe.xml" value="0.2" />
@@ -45,7 +47,7 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_recipe.xml" value="0.2" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_settings.xml" value="0.264" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/add_ingredient_popup.xml" value="0.20512820512820512" />
-        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/add_step_popup.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/add_step_popup.xml" value="0.12083333333333333" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/cancel_popup.xml" value="0.27976878612716766" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/content_account_creation.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/fragment_dashboard.xml" value="0.1170940170940171" />
