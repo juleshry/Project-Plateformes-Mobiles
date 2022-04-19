@@ -1,8 +1,6 @@
 package com.example.projectplateformesmobiles.ui.login
 
-import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
+import android.util.Patterns
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
@@ -21,7 +19,6 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.example.projectplateformesmobiles.Menu
 import com.example.projectplateformesmobiles.ui.accountCreation.AccountCreation
-
 import com.example.projectplateformesmobiles.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -33,9 +30,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.facebook.login.LoginManager
-import com.facebook.login.widget.LoginButton
 import kotlinx.android.synthetic.main.activity_login.*
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -46,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var auth: FirebaseAuth
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,13 +62,6 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-        val fbLoginButton: LoginButton = findViewById(R.id.fb_login_button)
-        fbLoginButton.setPermissions("email", "public_profile")
-        fbLoginButton.setOnClickListener {
-            val fbIntent = Intent(this, FacebookActivity::class.java)
-            fbIntent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-            startActivity(fbIntent)
-        }
 
         val login: Button = findViewById(R.id.login)
         val email: EditText = findViewById(R.id.email)
@@ -101,32 +89,16 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        loginViewModel.loginResult.observe(this@LoginActivity, Observer {
-            val loginResult = it ?: return@Observer
-
-            loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
-            }
-            if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
-            }
-            setResult(Activity.RESULT_OK)
-
-            //Complete and destroy login activity once successful
-            finish()
-        })
-
-        email.addTextChangedListener{
+        email.addTextChangedListener {
             val mail = email.text.toString()
-            if(!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()){
+            if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
                 email.setTextColor(Color.RED)
             } else {
                 email.setTextColor(Color.WHITE)
             }
         }
 
-        password.addTextChangedListener{
+        password.addTextChangedListener {
             //TODO : Mettre en place le bon format du mot de passe
             val p = password.text.toString()
             val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{7,}\$"
@@ -157,15 +129,16 @@ class LoginActivity : AppCompatActivity() {
             login.setOnClickListener {
                 auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
                     .addOnCompleteListener { task ->
-                        if(task.isSuccessful){
+                        if (task.isSuccessful) {
                             Log.d("SignIn", "SigninWithEmail:success")
-                            val user =  auth.currentUser
+                            val user = auth.currentUser
                             updateUI(user)
                         } else {
                             Log.w("SignIn", "SigninWithEmail:failure", task.exception)
                             email.setTextColor(Color.RED)
                             password.setTextColor(Color.RED)
-                            Toast.makeText(baseContext, "Authentication failed", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext, "Authentication failed", Toast.LENGTH_SHORT)
+                                .show()
                             updateUI(null)
                         }
                     }
