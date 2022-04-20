@@ -155,14 +155,18 @@
 
                     <Button
                         android:id="@+id/shareButton"
-                        android:layout_width="31dp"
-                        android:layout_height="38dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="@dimen/activity_horizontal_margin"
-                        android:background="@drawable/share_button"
+                        android:drawableTop="@drawable/share_button"
+                        android:background="@color/white"
+                        android:elevation="0dp"
                         android:padding="@dimen/closeButtonPadding"
                         android:text="@string/Share"
-                        android:textSize="0dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/dark_green"
+                        android:textSize="15dp"
                         tools:ignore="TouchTargetSizeCheck"
                         />
 
@@ -174,14 +178,17 @@
 
                     <Button
                         android:id="@+id/editButton"
-                        android:layout_width="37dp"
-                        android:layout_height="37dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="@dimen/activity_horizontal_margin"
-                        android:background="@drawable/edit_button"
+                        android:drawableTop="@drawable/edit_button"
+                        android:background="@color/white"
                         android:padding="@dimen/closeButtonPadding"
-                        android:text="@string/Share"
-                        android:textSize="0dp"
+                        android:text="Modififer"
+                        android:textSize="15dp"
+                        android:textColor="@color/dark_green"
+                        android:textAllCaps="false"
                         tools:ignore="TouchTargetSizeCheck"
                         />
 
@@ -192,6 +199,23 @@
                     </Space>
 
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:drawableTop="@drawable/favorite_light"
+                    android:background="@color/white"
+                    android:elevation="0dp"
+                    android:padding="@dimen/closeButtonPadding"
+                    android:text="Favoris"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dark_green"
+                    android:textSize="15dp"
+                    tools:ignore="TouchTargetSizeCheck"
+                    />
 
 
             </LinearLayout>
