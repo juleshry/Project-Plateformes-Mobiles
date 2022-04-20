@@ -625,7 +625,7 @@ class NewRecipe : AppCompatActivity() {
                             "description" to addStepDescriptionEditText.text.toString(),
                             "timePrecision" to spinner.selectedItem.toString(),
                             "duration" to timeSet.text.toString()
-                        )
+                        ) as HashMap<String, String>
                     )
                 val stepInfos = mutableMapOf(
                     "ingredients" to saveIngredient,
@@ -644,7 +644,7 @@ class NewRecipe : AppCompatActivity() {
                         mutableMapOf(
                             "ingredients" to saveIngredient,
                             "description" to addStepDescriptionEditText.text.toString()
-                        )
+                        ) as HashMap<String, String>
                     )
 
                 }
