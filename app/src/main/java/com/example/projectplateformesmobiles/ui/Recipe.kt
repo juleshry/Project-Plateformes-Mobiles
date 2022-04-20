@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.*
@@ -13,6 +14,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.setMargins
 import androidx.core.view.setPadding
 import com.example.projectplateformesmobiles.R
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -289,6 +291,57 @@ class Recipe : AppCompatActivity() {
                 editIntent.putExtra("ID", ID)
                 startActivity(editIntent)
             }
+        }
+
+        val userRef = Firebase.firestore.collection("users").document(Firebase.auth.currentUser?.uid.toString())
+        val favoriteButton: Button = findViewById(R.id.favorite)
+        var isFavorite = false
+        var userRecipes: MutableList<String> = mutableListOf()
+        var userEmail: String = ""
+        userRef.get().addOnSuccessListener { userDocument ->
+            userRecipes = userDocument.get("recipes") as MutableList<String>
+            userEmail = userDocument.get("email") as String
+            for (recipe in userRecipes){
+                if(ID == recipe){
+                    val top = resources.getDrawable(R.drawable.favorite_plain)
+                    favoriteButton.setCompoundDrawablesWithIntrinsicBounds(
+                        null,
+                        top,
+                        null,
+                        null)
+                    isFavorite = true
+                }
+            }
+        }
+        favoriteButton.setOnClickListener{
+            if(isFavorite){
+                val top = resources.getDrawable(R.drawable.favorite_light)
+                favoriteButton.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    top,
+                    null,
+                    null)
+                userRecipes.remove(ID)
+                val userInfos = hashMapOf(
+                    "email" to userEmail,
+                    "recipes" to userRecipes
+                )
+                userRef.set(userInfos)
+            } else {
+                val top = resources.getDrawable(R.drawable.favorite_plain)
+                favoriteButton.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    top,
+                    null,
+                    null)
+                userRecipes.add(ID!!)
+                val userInfos = hashMapOf(
+                    "email" to userEmail,
+                    "recipes" to userRecipes
+                )
+                userRef.set(userInfos)
+            }
+            isFavorite = !isFavorite
         }
     }
 }
