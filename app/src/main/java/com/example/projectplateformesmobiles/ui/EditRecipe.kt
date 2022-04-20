@@ -144,8 +144,8 @@ class EditRecipe : AppCompatActivity() {
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                         val data = baos.toByteArray()
 
-                        val imageRef = storageReference?.child(ID)
-                        val uploadTask = imageRef?.putBytes(data)
+                        val imageReference = storageReference?.child(ID)
+                        val uploadTask = imageReference?.putBytes(data)
                         if (uploadTask != null) {
                             uploadTask.addOnFailureListener {
                                 // Handle unsuccessful uploads

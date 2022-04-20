@@ -59,8 +59,10 @@ class Play_mode : AppCompatActivity() {
             }
             stepIngredients = currentStepIngredients
             stepDescription = currentStepInfos["description"]!!
-            stepDuration = currentStepInfos["duration"]!!
-            stepDurationPrecision = currentStepInfos["timePrecision"]!!
+            if(currentStepInfos["duration"] != null) {
+                stepDuration = currentStepInfos["duration"]!!
+                stepDurationPrecision = currentStepInfos["timePrecision"]!!
+            }
 
 
         }
@@ -74,6 +76,7 @@ class Play_mode : AppCompatActivity() {
         bundle.putSerializable("timePrecision", stepDurationPrecision)
         bundle.putSerializable("step", step)
         bundle.putSerializable("stepsNumber", steps.size)
+        bundle.putSerializable("ID", intent.extras?.get("ID").toString())
         playModeFragment.arguments = bundle
 
         supportFragmentManager.beginTransaction()

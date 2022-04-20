@@ -417,7 +417,8 @@ class NewRecipe : AppCompatActivity() {
         step: String,
         value: HashMap<String, String>
     ) {
-        var tmpStep: HashMap<String, HashMap<String, String>> = steps.clone() as HashMap<String, HashMap<String, String>>
+        var tmpStep: HashMap<String, HashMap<String, String>> =
+            steps.clone() as HashMap<String, HashMap<String, String>>
 
         val popupView: View = inflater.inflate(R.layout.add_step_popup, null)
 
@@ -572,7 +573,7 @@ class NewRecipe : AppCompatActivity() {
             popupView.findViewById(R.id.addStepDescriptionEditText)
 
         val timeSet: EditText = popupView.findViewById(R.id.timeSet)
-        val spinner : Spinner = popupView.findViewById(R.id.timer_spinner)
+        val spinner: Spinner = popupView.findViewById(R.id.timer_spinner)
         spinner.setSelection(0)
 
         val stepGrid: GridLayout = popupView.findViewById(R.id.addStepGrid)
@@ -617,28 +618,20 @@ class NewRecipe : AppCompatActivity() {
                     saveIngredient += b.text.toString() + ", "
                 }
 
-                if (timeSet.text.toString() != null){
-                    steps.set(
-                        addStepTitleEditText.text.toString(),
-                        mutableMapOf(
-                            "ingredients" to saveIngredient,
-                            "description" to addStepDescriptionEditText.text.toString(),
-                            "timePrecision" to spinner.selectedItem.toString(),
-                            "duration" to timeSet.text.toString()
-                        ) as HashMap<String, String>
-                    )
-                val stepInfos = mutableMapOf(
-                    "ingredients" to saveIngredient,
-                    "description" to addStepDescriptionEditText.text.toString()
-                ) as HashMap<String, String>
-                steps[addStepTitleEditText.text.toString()] = stepInfos
+                if (timeSet.text.toString() != null) {
+                    val stepInfos = mutableMapOf(
+                        "ingredients" to saveIngredient,
+                        "description" to addStepDescriptionEditText.text.toString(),
+                        "timePrecision" to spinner.selectedItem.toString(),
+                        "duration" to timeSet.text.toString()
+                    ) as HashMap<String, String>
+                    steps[addStepTitleEditText.text.toString()] = stepInfos
 
 
-                showStep(addStepTitleEditText.text.toString(), stepInfos, inflater, view)
+                    showStep(addStepTitleEditText.text.toString(), stepInfos, inflater, view)
 
 
-
-                }else{
+                } else {
                     steps.set(
                         addStepTitleEditText.text.toString(),
                         mutableMapOf(

@@ -51,8 +51,10 @@ class PlayFragment : Fragment() {
     private lateinit var timeTV: TextView
     private lateinit var timerLayout: View
     private lateinit var timerParentLayout: ViewGroup
+    private lateinit var ID: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val bundle: Bundle? = arguments
         if (bundle?.getSerializable("title") != null)
             title = bundle?.getSerializable("title") as String
@@ -68,6 +70,8 @@ class PlayFragment : Fragment() {
             time = (bundle?.getSerializable("duration") as String).toDouble()
         if (bundle?.getSerializable("timePrecision") != null)
             timePrecision = bundle?.getSerializable("timePrecision") as String
+        if (bundle?.getSerializable("ID") != null)
+            ID = bundle?.getSerializable("ID") as String
         initTime = time
 
     }
@@ -82,6 +86,9 @@ class PlayFragment : Fragment() {
         val closeButton: Button = view.findViewById(R.id.play_end)
         closeButton.setOnClickListener {
             activity?.finish()
+            //val RecipeIntent = Intent(this.requireContext(), Recipe::class.java)
+            //RecipeIntent.putExtra("ID", ID)
+            //startActivity(RecipeIntent)
         }
 
         val previousStepButton: Button = view.findViewById(R.id.previousStep)
@@ -109,6 +116,9 @@ class PlayFragment : Fragment() {
             nextStepButton.text = resources.getString(R.string.Finish)
             nextStepButton.setOnClickListener {
                 activity?.finish()
+                val RecipeIntent = Intent(this.requireContext(), Recipe::class.java)
+                RecipeIntent.putExtra("ID", ID)
+                startActivity(RecipeIntent)
             }
         } else {
             nextStepButton.setOnClickListener {
