@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../.gradle/caches/transforms-3/68f16b4348e1c1fa1d5cf58316a8cd5d/transformed/jetified-facebook-share-4.42.0/res/drawable/com_facebook_button_send_background.xml" value="0.1" />
         <entry key="..\:/Users/jubil/AndroidStudioProjects/ProjectPlateformesMobiles/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/jubil/AndroidStudioProjects/ProjectPlateformesMobiles/app/src/main/res/drawable/background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/jubil/AndroidStudioProjects/ProjectPlateformesMobiles/app/src/main/res/drawable/button.xml" value="0.25052083333333336" />
@@ -24,12 +23,9 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/close_button.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/continue_button_popup.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/disabled_button.xml" value="0.21561181434599155" />
-<<<<<<< HEAD
-=======
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/edit_button.xml" value="0.19145299145299147" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/favorite_light.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/favorite_plain.xml" value="0.21561181434599155" />
->>>>>>> fcdb817db60b8846d2e98c9f9476cb111d2799c2
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/full_background.xml" value="0.21561181434599155" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/home_logo.xml" value="0.11752136752136752" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/drawable/middle_play_mode.xml" value="0.21561181434599155" />
@@ -44,6 +40,7 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout-w936dp/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_account.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_account_creation.xml" value="0.264" />
+        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_edit_recipe.xml" value="0.1782051282051282" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_menu.xml" value="0.4" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_new_recipe.xml" value="0.2" />
@@ -51,7 +48,7 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_recipe.xml" value="0.2" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/activity_settings.xml" value="0.264" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/add_ingredient_popup.xml" value="0.20512820512820512" />
-        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/add_step_popup.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/add_step_popup.xml" value="0.2" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/cancel_popup.xml" value="0.27976878612716766" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/content_account_creation.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/layout/fragment_dashboard.xml" value="0.1170940170940171" />
@@ -66,25 +63,7 @@
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.4" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15358649789029535" />
         <entry key="..\:/Users/jubil/Documents/UQAC/Hiver/Application Mobile/ProjectPlateformesMobiles/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15555555555555556" />
-        <entry key="app/src/main/res/drawable/edit_button.xml" value="0.2085" />
-        <entry key="app/src/main/res/drawable/full_background.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/plain_button.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/play_button.xml" value="0.2085" />
-        <entry key="app/src/main/res/drawable/rounded_edittext.xml" value="0.165" />
-        <entry key="app/src/main/res/drawable/share_button.xml" value="0.2085" />
-        <entry key="app/src/main/res/layout/activity_account.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_account_creation.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_facebook.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/activity_new_recipe.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/activity_play_mode.xml" value="0.15572916666666667" />
-        <entry key="app/src/main/res/layout/activity_recipe.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/add_ingredient_popup.xml" value="0.15572916666666667" />
-        <entry key="app/src/main/res/layout/add_step_popup.xml" value="0.4434310913085938" />
-        <entry key="app/src/main/res/layout/fragment_edit_recipe.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/fragment_play.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/photo_popup.xml" value="0.3098958333333333" />
       </map>
     </option>
   </component>

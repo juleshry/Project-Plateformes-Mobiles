@@ -22,141 +22,148 @@
         android:layout_centerVertical="true"
         >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/addStepTitleEditText"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/vert_field_separation"
-                android:background="@drawable/rounded_edittext"
-                android:hint="@string/addTitle"
-                android:padding="@dimen/horizontal_padding"
-                android:textColor="@color/white"
-                android:textColorHint="@color/grey"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="vertical">
 
-            <ScrollView
-                android:id="@+id/addStepScrollView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addStepTitleEditText">
-
-                <GridLayout
-                    android:id="@+id/addStepGrid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:columnCount="2"
-                    android:layout_margin="@dimen/vert_field_separation"
-                    android:padding="@dimen/horizontal_padding"/>
-
-            </ScrollView>
-
-            <EditText
-                android:id="@+id/addStepDescriptionEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/vert_field_separation"
-                android:background="@drawable/rounded_edittext"
-                android:gravity="top"
-                android:hint="@string/addDescription"
-                android:inputType="textMultiLine"
-                android:minHeight="70dp"
-                android:padding="@dimen/horizontal_padding"
-                android:textColor="@color/white"
-                android:textColorHint="@color/grey"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addStepScrollView" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addStepDescriptionEditText"
-                app:layout_constraintBottom_toBottomOf="parent"
-                >
-
-                <LinearLayout
+                <EditText
+                    android:id="@+id/addStepTitleEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="80dp"
-                    android:paddingTop="20dp">
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/vert_field_separation"
+                    android:background="@drawable/rounded_edittext"
+                    android:hint="@string/addTitle"
+                    android:padding="@dimen/horizontal_padding"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/grey"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <EditText
-                        android:id="@+id/timeSet"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_edittext"
-                        android:inputType="numberDecimal"
-                        android:gravity="top"
-                        android:padding="@dimen/horizontal_padding"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/grey"
-                        android:textSize="15sp" />
-
-                    <Spinner
-                        android:id="@+id/timer_spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/array_time" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
+                <ScrollView
+                    android:id="@+id/addStepScrollView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addStepTitleEditText">
 
-                    <Button
-                        android:id="@+id/deleteNewStepPopup"
+                    <GridLayout
+                        android:id="@+id/addStepGrid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="@dimen/activity_horizontal_margin"
-                        android:background="@drawable/light_button"
-                        android:paddingHorizontal="@dimen/fab_margin"
-                        android:text="@string/delete"
-                        android:textAllCaps="false"
-                        android:textColor="@color/dark_green" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/confirmNewStepPopup"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_horizontal"
+                        android:columnCount="2"
                         android:layout_margin="@dimen/vert_field_separation"
-                        android:background="@drawable/plain_button"
-                        android:paddingHorizontal="@dimen/fab_margin"
-                        android:text="@string/confirm"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/addStepDescriptionEditText" />
+                        android:padding="@dimen/horizontal_padding"/>
 
+                </ScrollView>
+
+                <EditText
+                    android:id="@+id/addStepDescriptionEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/vert_field_separation"
+                    android:background="@drawable/rounded_edittext"
+                    android:gravity="top"
+                    android:hint="@string/addDescription"
+                    android:inputType="textMultiLine"
+                    android:minHeight="70dp"
+                    android:padding="@dimen/horizontal_padding"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/grey"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addStepScrollView"
+                    app:layout_constraintBottom_toTopOf="@id/Bottom"/>
+
+                <LinearLayout
+                    android:id="@+id/Bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/addStepDescriptionEditText"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="80dp"
+                        android:paddingTop="20dp">
+
+                        <EditText
+                            android:id="@+id/timeSet"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_edittext"
+                            android:inputType="numberDecimal"
+                            android:gravity="top"
+                            android:padding="@dimen/horizontal_padding"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/grey"
+                            android:textSize="15sp" />
+
+                        <Spinner
+                            android:id="@+id/timer_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/array_time" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/deleteNewStepPopup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/activity_horizontal_margin"
+                            android:background="@drawable/light_button"
+                            android:paddingHorizontal="@dimen/fab_margin"
+                            android:text="@string/delete"
+                            android:textAllCaps="false"
+                            android:textColor="@color/dark_green" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:id="@+id/confirmNewStepPopup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/vert_field_separation"
+                            android:background="@drawable/plain_button"
+                            android:paddingHorizontal="@dimen/fab_margin"
+                            android:text="@string/confirm"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/addStepDescriptionEditText" />
+
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
     </RelativeLayout>
 </RelativeLayout>
