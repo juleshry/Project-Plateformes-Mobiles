@@ -393,6 +393,10 @@ class NewRecipe : AppCompatActivity() {
         val addStepDescriptionEditText: EditText =
             popupView.findViewById(R.id.addStepDescriptionEditText)
 
+        val timeSet: EditText = popupView.findViewById(R.id.timeSet)
+        val spinner : Spinner = popupView.findViewById(R.id.timer_spinner)
+        spinner.setSelection(0)
+
         val stepGrid: GridLayout = popupView.findViewById(R.id.addStepGrid)
         val buttons = mutableSetOf<Button>()
         for ((k, v) in ingredients) {
@@ -451,14 +455,28 @@ class NewRecipe : AppCompatActivity() {
                 for (b in buttons) {
                     saveIngredient += b.text.toString() + ", "
                 }
-                steps.set(
-                    addStepTitleEditText.text.toString(),
-                    mutableMapOf(
-                        "ingredients" to saveIngredient,
-                        "description" to addStepDescriptionEditText.text.toString()
-                    )
-                )
 
+                if (timeSet.text.toString() != null){
+                    steps.set(
+                        addStepTitleEditText.text.toString(),
+                        mutableMapOf(
+                            "ingredients" to saveIngredient,
+                            "description" to addStepDescriptionEditText.text.toString(),
+                            "timePrecision" to spinner.selectedItem.toString(),
+                            "duration" to timeSet.text.toString()
+                        )
+                    )
+
+                }else{
+                    steps.set(
+                        addStepTitleEditText.text.toString(),
+                        mutableMapOf(
+                            "ingredients" to saveIngredient,
+                            "description" to addStepDescriptionEditText.text.toString()
+                        )
+                    )
+
+                }
                 closePopupListener()
             } else {
                 Toast.makeText(

@@ -64,16 +64,16 @@
                 android:id="@+id/addStepDescriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="70dp"
-                android:layout_marginTop="@dimen/vert_field_separation"
                 android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/vert_field_separation"
                 android:background="@drawable/rounded_edittext"
-                android:hint="@string/addDescription"
-                android:padding="@dimen/horizontal_padding"
-                android:textColorHint="@color/grey"
-                android:textColor="@color/white"
-                android:inputType="textMultiLine"
                 android:gravity="top"
+                android:hint="@string/addDescription"
+                android:inputType="textMultiLine"
+                android:minHeight="70dp"
+                android:padding="@dimen/horizontal_padding"
+                android:textColor="@color/white"
+                android:textColorHint="@color/grey"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/addStepScrollView" />
@@ -81,43 +81,79 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addStepDescriptionEditText">
+                app:layout_constraintTop_toBottomOf="@+id/addStepDescriptionEditText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
 
-                <Button
-                    android:id="@+id/deleteNewStepPopup"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:background="@drawable/light_button"
-                    android:paddingHorizontal="@dimen/fab_margin"
-                    android:text="@string/delete"
-                    android:textAllCaps="false"
-                    android:textColor="@color/dark_green" />
+                    android:orientation="horizontal"
+                    android:paddingLeft="80dp"
+                    android:paddingTop="20dp">
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
+                    <EditText
+                        android:id="@+id/timeSet"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_edittext"
+                        android:inputType="numberDecimal"
+                        android:gravity="top"
+                        android:padding="@dimen/horizontal_padding"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/grey"
+                        android:textSize="15sp" />
 
-                <Button
-                    android:id="@+id/confirmNewStepPopup"
-                    android:layout_width="wrap_content"
+                    <Spinner
+                        android:id="@+id/timer_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/array_time" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/vert_field_separation"
-                    android:background="@drawable/plain_button"
-                    android:paddingHorizontal="@dimen/fab_margin"
-                    android:text="@string/confirm"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/addStepDescriptionEditText" />
+                    android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/deleteNewStepPopup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:background="@drawable/light_button"
+                        android:paddingHorizontal="@dimen/fab_margin"
+                        android:text="@string/delete"
+                        android:textAllCaps="false"
+                        android:textColor="@color/dark_green" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/confirmNewStepPopup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/vert_field_separation"
+                        android:background="@drawable/plain_button"
+                        android:paddingHorizontal="@dimen/fab_margin"
+                        android:text="@string/confirm"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/addStepDescriptionEditText" />
+
+                </LinearLayout>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

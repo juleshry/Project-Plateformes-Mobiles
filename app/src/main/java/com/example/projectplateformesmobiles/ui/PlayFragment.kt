@@ -1,9 +1,12 @@
 package com.example.projectplateformesmobiles.ui
 
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +15,15 @@ import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.setMargins
+import androidx.fragment.app.Fragment
 import com.example.projectplateformesmobiles.R
+import com.example.projectplateformesmobiles.TimerService
+import com.example.projectplateformesmobiles.databinding.ActivityPlayModeBinding
 import kotlinx.android.synthetic.main.fragment_play.*
+import kotlin.math.roundToInt
 
 
 /**
@@ -29,6 +38,19 @@ class PlayFragment : Fragment() {
     private var step: Int = 0
     private var stepsNumber: Int = 0
 
+    private lateinit var binding: ActivityPlayModeBinding
+    private var timerStarted = false
+    private lateinit var serviceIntent: Intent
+    private var time = 0.0
+    private var initTime = 0.0
+
+    private lateinit var timePrecision : String
+    private var isResetting = false
+    private lateinit var startStopButton: Button
+    private lateinit var resetButton: Button
+    private lateinit var timeTV: TextView
+    private lateinit var timerLayout: View
+    private lateinit var timerParentLayout: ViewGroup
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bundle: Bundle? = arguments
@@ -42,6 +64,12 @@ class PlayFragment : Fragment() {
             description = bundle?.getSerializable("description") as String
         if (bundle?.getSerializable("ingredients") != null)
             ingredients = bundle?.getSerializable("ingredients") as HashMap<String, String>
+        if (bundle?.getSerializable("duration") != null)
+            time = (bundle?.getSerializable("duration") as String).toDouble()
+        if (bundle?.getSerializable("timePrecision") != null)
+            timePrecision = bundle?.getSerializable("timePrecision") as String
+        initTime = time
+
     }
 
     override fun onCreateView(
@@ -57,11 +85,21 @@ class PlayFragment : Fragment() {
         }
 
         val previousStepButton: Button = view.findViewById(R.id.previousStep)
+        timerLayout = view.findViewById(R.id.timerSettings)
+        timerParentLayout = view.findViewById(R.id.stepInfos)
         if (step == 0) {
             previousStepButton.isEnabled = false
             previousStepButton.background = resources.getDrawable(R.drawable.disabled_button)
             previousStepButton.setTextColor(Color.DKGRAY)
         }
+        if (time == null || time == 0.0){
+            timerLayout.visibility = View.GONE
+            //timerParentLayout.removeView(timerLayout)
+        }else {
+            timerLayout.visibility = View.VISIBLE
+            //timerParentLayout.addView(timerLayout)
+        }
+
         previousStepButton.setOnClickListener {
             (activity as Play_mode).previsousStep()
         }
@@ -84,6 +122,25 @@ class PlayFragment : Fragment() {
         val stepInfosLayout: LinearLayout = view.findViewById(R.id.stepInfos)
 
         val ingredientsGridLayout: GridLayout = view.findViewById(R.id.play_mode_ingredients)
+
+        //binding = ActivityPlayModeBinding.inflate(layoutInflater)
+        startStopButton = view.findViewById<Button>(R.id.startStopButton)
+        resetButton = view.findViewById<Button>(R.id.resetButton)
+        timeTV = view.findViewById<TextView>(R.id.timeTV)
+        timeTV.text = makeTimeString(0, 0, time.toInt())
+        startStopButton.setOnClickListener {
+            if(timerStarted)
+                stopTimer()
+            else
+                startTimer() }
+        resetButton.setOnClickListener {
+            isResetting = true
+            stopTimer()
+            timeTV.text = getTimeStringFromDouble(initTime)
+        }
+
+        serviceIntent = Intent(getActivity()?.getApplicationContext(), TimerService::class.java)
+        requireActivity().registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
 
         for ((k, v) in ingredients!!) {
             if (k != "" &&  k != " ") {
@@ -181,6 +238,70 @@ class PlayFragment : Fragment() {
 
         return view;
     }
+
+    private fun startTimer()
+    {
+        if (isResetting){
+            time = initTime
+            isResetting = false
+        }
+        serviceIntent.putExtra(TimerService.TIME_EXTRA, time)
+
+        getActivity()?.startService(serviceIntent)
+
+        startStopButton.text = "Stop"
+        //startStopButton.setCompoundDrawables(Drawable(R.drawable.ic_baseline_pause_24))
+        timerStarted = true
+    }
+
+    private fun stopTimer()
+    {
+        getActivity()?.stopService(serviceIntent)
+        startStopButton.text = "Start"
+        //startStopButton.icon = getDrawable(R.drawable.ic_baseline_play_arrow_24)
+        timerStarted = false
+    }
+
+    private val updateTime: BroadcastReceiver = object : BroadcastReceiver()
+    {
+        override fun onReceive(context: Context, intent: Intent)
+        {
+
+            time = intent.getDoubleExtra(TimerService.TIME_EXTRA, 0.0)
+            if (time <= 0.0){
+                val intent = Intent(activity, Play_mode::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
+                val pendingIntent: PendingIntent = PendingIntent.getActivity(activity, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+                var builder = NotificationCompat.Builder(requireActivity(), "timer Stopped")
+                    .setSmallIcon(R.drawable.logo_app_green_blob_prog)
+                    .setContentTitle("Fin d'étape")
+                    .setContentText("Vous pouvez continuer la recette")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+
+                with(NotificationManagerCompat.from(requireActivity())) {
+                    // notificationId is a unique int for each notification that you must define
+                    notify(1, builder.build())
+                }
+            }
+            timeTV.text = getTimeStringFromDouble(time)
+        }
+    }
+
+    private fun getTimeStringFromDouble(time: Double): String
+    {
+        val resultInt = time.roundToInt()
+        val hours = resultInt % 86400 / 3600
+        val minutes = resultInt % 86400 % 3600 / 60
+        val seconds = resultInt % 86400 % 3600 % 60
+
+        return makeTimeString(hours, minutes, seconds)
+    }
+
+    private fun makeTimeString(hour: Int, min: Int, sec: Int): String = String.format("%02d:%02d:%02d", hour, min, sec)
 
 
 }

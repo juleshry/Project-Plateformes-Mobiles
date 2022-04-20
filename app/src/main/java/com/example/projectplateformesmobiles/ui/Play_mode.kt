@@ -1,8 +1,11 @@
 package com.example.projectplateformesmobiles.ui
 
+import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import com.example.projectplateformesmobiles.R
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -26,6 +29,7 @@ class Play_mode : AppCompatActivity() {
             steps =
                 recipeDocument.get("steps") as HashMap<String, HashMap<String, String>>
 
+
             showFragment()
         }
 
@@ -35,6 +39,11 @@ class Play_mode : AppCompatActivity() {
         var stepTitle: String? = null
         var stepIngredients: HashMap<String, String>? = null
         var stepDescription: String? = null
+        var stepDuration: String? = null
+        var stepDurationPrecision: String? = null
+
+
+
 
         if (step == 0) {
             stepTitle = "Préparation des ingrédients"
@@ -50,6 +59,10 @@ class Play_mode : AppCompatActivity() {
             }
             stepIngredients = currentStepIngredients
             stepDescription = currentStepInfos["description"]!!
+            stepDuration = currentStepInfos["duration"]!!
+            stepDurationPrecision = currentStepInfos["timePrecision"]!!
+
+
         }
 
         val playModeFragment = PlayFragment()
@@ -57,6 +70,8 @@ class Play_mode : AppCompatActivity() {
         bundle.putSerializable("title", stepTitle)
         bundle.putSerializable("description", stepDescription)
         bundle.putSerializable("ingredients", stepIngredients)
+        bundle.putSerializable("duration", stepDuration)
+        bundle.putSerializable("timePrecision", stepDurationPrecision)
         bundle.putSerializable("step", step)
         bundle.putSerializable("stepsNumber", steps.size)
         playModeFragment.arguments = bundle
